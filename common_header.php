@@ -14,7 +14,7 @@
 		</div>
 		
 		<div class = "links">
-			<a href = "profile.html"> Profile </a>
+			<a href = "profile.php"> Profile </a>
 			<a href = "#activity"> Activity </a>
 			<a href = "#people"> People </a>
 			<a href = "#films"> Films </a>
