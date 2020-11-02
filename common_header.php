@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome to MovieShelf!</title>
-<link rel="stylesheet" href="header_styles.css">
+<link rel="stylesheet" href="css/header_styles.css">
 </head>
 	
 <body>
