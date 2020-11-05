@@ -9,7 +9,7 @@
 <body>
 	<div class = "header">
 		<div class = "logo">
-			<a href = "#home">MovieShelf</a>
+			<a href = "index.php">MovieShelf</a>
 			<a href = "#signout" class = "signout">Sign out</a>
 		</div>
 		
