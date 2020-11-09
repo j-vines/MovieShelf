@@ -7,7 +7,6 @@
 <?php include "common_header.php"; ?>
 <body>
 	
-	
 	<h2>Content</h2>
 	
 </body>

@@ -5,4 +5,11 @@
 	width: 50%;
 	margin: auto;
 	text-align: center;
+	background-color: cadetblue;
+	padding: 30px;
 }
+
+form {display: table;}
+p {display: table-row;}
+label {display: table-cell;}
+input {display: table-cell;}
