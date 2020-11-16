@@ -44,7 +44,6 @@ a {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	background-color: grey;
-	position: -webkit-sticky; /* Safari */
 	position: sticky;
 	top: 0;
 }

@@ -15,7 +15,7 @@
 		</div>
 		
 		<div class = "loginForm" id = "loginForm">
-			<form>
+			<form action = "login.php" method = "post">
 				<label for="username">Username:</label>
   				<input type="text" id="username" name="username" 
 				  pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="Enter a valid username.">
