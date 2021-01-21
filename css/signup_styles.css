@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* CSS Document */
 
+.error {
+	color: red;
+}
+
 .sign-in {
 	width: 50%;
 	margin: auto;

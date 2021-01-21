@@ -1,17 +1,39 @@
+<?php
+	session_start();
+	
+	$login_message_content = "";
+	//CHECK IF USER COOKIE IS SET. IF NOT, DISPLAY LOGIN BUTTON, IF SO, DISPLAY WELCOME MESSAGE AND SIGN IN BUTTON
+	if(isset($_COOKIE["user"])) {
+		$login_message_content = "Welcome, ".$_COOKIE["user"]."!"
+									."<br><form action='signout.php' method='post'>
+    									<input type='submit' name='signout' id='signout' value='Sign Out' /><br/>
+										</form>";
+	} else {
+		$login_message_content = "<button class = 'button' type='button' onClick='displayForm()'>Log In</button>";
+	}
+?>
 <!doctype html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Welcome to MovieShelf!</title>
 <link rel="stylesheet" href="css/header_styles.css">
-<script src="scripts/loginMessage.js"></script>
+<script src="scripts/loginFunctions.js"></script>
 </head>
 	
 <body onLoad="init()">
 	
 	<div class = "header">
+		<!-- Div stores either login button, or, when user is logged in, a welcome message and sign out button -->
 		<div class = "loginMessage" id = "loginMessage">
-			<button class = "button" type="button" onClick="displayForm()">Log In</button>
+			<!--<button class = "button" type="button" onClick="displayForm()">Log In</button>-->
+			<?php
+				//if last login failed, display login error message
+				if(isset($_COOKIE["login_error"])) {
+					echo("<p class='error'>".$_COOKIE["login_error"]."</p>");
+				}
+			?>
+			<?php echo($login_message_content); ?>
 		</div>
 		
 		<div class = "loginForm" id = "loginForm">
@@ -21,13 +43,16 @@
 				  pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="Enter a valid username.">
 				<br>
 				<label for="password">Password:</label>
-  				<input type="text" id="password" name="password" 
+  				<input type="password" id="password" name="password" 
 				  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
 				<br>
+				<input type="checkbox" onclick="togglePassword()">Show Password
+				<br>
+				
 				<input class="button" type="submit" value="Log In">
 				<button class="button" type="button" onClick="hideForm()">Cancel</button><br>
 			
-				<a href="signup.php">Create an Account</a>
+				Don't have an account? <a href="signup.php">Create one!</a>
 			</form>
 		</div>
 		
@@ -38,8 +63,12 @@
 	</div>
 	
 	<div class = "links">
-			<a href = "profile.php"> PROFILE </a>
-			<a href = "#activity"> ACTIVITY </a>
+		<?php
+			if(isset($_COOKIE["user"])) { //only give profile and activity options if user is logged in
+				echo("<a href = 'profile.php'> PROFILE </a>
+					<a href = '#activity'> ACTIVITY </a>");
+			}
+		?>
 			<a href = "#people"> PEOPLE </a>
 			<a href = "#films"> FILMS </a>
 		</div>

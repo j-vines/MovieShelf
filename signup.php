@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Welcome to MovieShelf!</title>
 <link rel="stylesheet" href="css/signup_styles.css">
+<script src="scripts/loginFunctions.js"></script>
 </head>
 
 <body>
@@ -25,10 +26,17 @@
 			</p>
 			<p>
 				<label for="password">Password:</label>
-  				<input type="text" id="password" name="password" 
+  				<input type="password" id="password" name="password" 
 				   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
+				<input type="checkbox" onclick="togglePassword()">Show Password
 			</p>
 			
+			<?php
+				//if last sign up failed, display error message
+				if(isset($_COOKIE["signup_error"])) {
+					echo("<p class='error'>".$_COOKIE["signup_error"]."</p><br>");
+				}
+			?>
 			
   			<input type="submit" value="Submit">
 		</form>

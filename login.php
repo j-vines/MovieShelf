@@ -1,8 +1,8 @@
 <?php
-	session_start();
 	include "scripts/db_connect.php";
 	
 	$user_exists = false;
+	setcookie("login_error", "", time() - 86400, "/"); //unset the login error cookie each time log in attempt is made
 
 	//process POST info
 	if($_POST["username"] != "" &&
@@ -19,10 +19,10 @@
 					$password = mysqli_fetch_array($password_search_result)[0];
 
 					if($password == $_POST["password"]) { //password in record matches given password
-						echo("Successfully able to log in!");
+						setcookie("user", $_POST["username"], time() + 86400, "/"); //user cookie has value of user's username.
 						
 					} else { //user exists but password is incorrect
-						echo("Incorrect password.");
+						setcookie("login_error", "Incorrect username or password.", time() + 86400, "/");
 					}
 					
 				} else {
@@ -31,7 +31,7 @@
 				}
 					
 			} else { //provided username not found in database
-				echo("No such user exists.");
+				setcookie("login_error", "Incorrect username or password.", time() + 86400, "/");
 			}
 			
 		} else {
@@ -40,9 +40,9 @@
 		}
 	
 	} else { //fields left blank
-		echo("You left one or more fields blank.");
+		setcookie("login_error", "You left one or more fields blank.", time() + 86400, "/");
 	}
-
 	include "scripts/db_close.php";
+	header("Location: index.php"); //redirect back to index
 
 ?>

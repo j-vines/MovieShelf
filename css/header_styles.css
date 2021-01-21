@@ -5,6 +5,10 @@ a {
 	text-decoration: none;
 }
 
+.error {
+	color: red;
+}
+
 .button {
 	padding: 10px;
 	font-size: 15px;

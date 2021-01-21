@@ -1,7 +1,7 @@
 <?php
-	session_start();
 	include "scripts/db_connect.php";
 
+	setcookie("signup_error", "", time() - 86400, "/"); //unset signup error cookie for each sign up attempt
 	//process the $_POST info
 	if($_POST["email"] != "" &&
 	  $_POST["username"] != "" &&
@@ -26,27 +26,30 @@
 		}
 
 		if($num_email == 0 && $num_user == 0) { //the username and email provided are unique
-			echo("New user can be created.");
-			
+
 			$user_insert = "INSERT INTO user (username, password, email, joined)
 							VALUES ('".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["email"]."', now());";
 			if($user_insert_result = mysqli_query($con, $user_insert)) {
-				echo("User successfully created!");
+				setcookie("user", $_POST["username"], time() + 86400, "/"); //user cookie has value of user's username.
 			} else {
 				echo("User could not be created.");
 				echo mysqli_error();
 			}
 		
 		} else { //"reload" signup.php and notify that user already exists
-			echo("User already exists.");
-			include "signup.php";
+			setcookie("signup_error", "That username or email taken.", time() + 86400, "/");
+			include "scripts/db_close.php";
+			header("Location: signup.php");
+			
 		}
 		
 	} else { //fields were left blank
-		echo("You left one or more fields blank!");
-		include "signup.php";
+		setcookie("signup_error", "You left one or more fields blank.", time() + 86400, "/");
+		include "scripts/db_close.php";
+		header("Location: signup.php");
 	}
 
 	include "scripts/db_close.php";
+	header("Location: index.php");
 
 ?>
