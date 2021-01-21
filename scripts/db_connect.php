@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	//session_start();
 
 	$db_name = "drawertl_jvines";
 

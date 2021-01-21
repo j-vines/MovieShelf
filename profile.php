@@ -10,8 +10,17 @@
 <body>
 	<div class="profileContent">
 		<?php
-			echo("<h2 class='profileTitle'>".$_COOKIE["user"]."'s Profile<h2>");
+			//Title of user's profile
+			include "scripts/get_display_name.php";
+		
+			echo("<h2 class='profileTitle'>".$username."'s Profile<h2>");
 		?>
+		<!-- Links to form for editing user profile -->
+		<a href = 'edit_profile.php'> Edit </a>
+		<div class="profilePic">
+		</div>
+		<div class="profileBio">
+		</div>
 	</div>
 	
 </body>

@@ -13,7 +13,7 @@
 <body>
 	<div class = "sign-in">
 		<h2>Sign up for MovieShelf!</h2>
-		<form action="create_account.php" method="post">
+		<form autocomplete="off" action="create_account.php" method="post">
 			<p>
 				<label for="email">Email:</label>
 				<input type="text" id="email" name="email" 

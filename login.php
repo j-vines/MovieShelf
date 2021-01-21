@@ -19,7 +19,15 @@
 					$password = mysqli_fetch_array($password_search_result)[0];
 
 					if($password == $_POST["password"]) { //password in record matches given password
-						setcookie("user", $_POST["username"], time() + 86400, "/"); //user cookie has value of user's username.
+						//Get the id of the user from the database, set the user cookie to the value of the id (non-identifiable info)
+						$id_get = "SELECT iduser FROM user WHERE username = '".$_POST["username"]."';";
+						if($id_get_result = mysqli_query($con, $id_get)) {
+							$id = mysqli_fetch_array($id_get_result)[0];
+						} else {
+							echo("User ID not found.");
+							echo mysqli_error();
+						}
+						setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
 						
 					} else { //user exists but password is incorrect
 						setcookie("login_error", "Incorrect username or password.", time() + 86400, "/");

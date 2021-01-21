@@ -4,7 +4,8 @@
 	$login_message_content = "";
 	//CHECK IF USER COOKIE IS SET. IF NOT, DISPLAY LOGIN BUTTON, IF SO, DISPLAY WELCOME MESSAGE AND SIGN IN BUTTON
 	if(isset($_COOKIE["user"])) {
-		$login_message_content = "Welcome, ".$_COOKIE["user"]."!"
+		include "scripts/get_display_name.php";
+		$login_message_content = "Welcome, ".$username."!"
 									."<br><form action='signout.php' method='post'>
     									<input type='submit' name='signout' id='signout' value='Sign Out' /><br/>
 										</form>";
@@ -43,7 +44,7 @@
 				  pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="Enter a valid username.">
 				<br>
 				<label for="password">Password:</label>
-  				<input type="password" id="password" name="password" 
+  				<input autocomplete="off" type="password" id="password" name="password" 
 				  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
 				<br>
 				<input type="checkbox" onclick="togglePassword()">Show Password
