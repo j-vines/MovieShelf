@@ -14,9 +14,7 @@
 		<input type="text" id="display_name" name="display_name"> <!-- NEEDS PATTERN -->
 		<br>
 		<label for="bio">Bio:</label>
-		<textarea maxlength="250" rows = "5" cols = "60" name = "bio">
-            Write something about yourself...
-        </textarea>
+		<textarea maxlength="250" rows = "5" cols = "60" id="bio" name = "bio"></textarea>
 		<br>
 			
 		<input type="submit" value="Save Changes">
