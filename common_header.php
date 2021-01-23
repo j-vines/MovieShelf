@@ -5,7 +5,7 @@
 	//CHECK IF USER COOKIE IS SET. IF NOT, DISPLAY LOGIN BUTTON, IF SO, DISPLAY WELCOME MESSAGE AND SIGN IN BUTTON
 	if(isset($_COOKIE["user"])) {
 		include "scripts/get_display_name.php";
-		$login_message_content = "Welcome, ".$username."!"
+		$login_message_content = "Welcome, ".$display_name."!"
 									."<br><form action='signout.php' method='post'>
     									<input type='submit' name='signout' id='signout' value='Sign Out' /><br/>
 										</form>";
@@ -17,7 +17,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to MovieShelf!</title>
 <link rel="stylesheet" href="css/header_styles.css">
 <script src="scripts/loginFunctions.js"></script>
 </head>
@@ -70,7 +69,7 @@
 					<a href = '#activity'> ACTIVITY </a>");
 			}
 		?>
-			<a href = "#people"> PEOPLE </a>
+			<a href = "people.php"> PEOPLE </a>
 			<a href = "#films"> FILMS </a>
 		</div>
 </body>

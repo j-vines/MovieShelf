@@ -10,7 +10,7 @@
 		echo mysqli_error();
 	}
 			
-	if($display_name == null) { //no display name for this user exists
+	/*if($display_name == null) { //no display name for this user exists
    		$username_search = "SELECT username FROM user WHERE iduser = '".$_COOKIE["user"]."';";
 		if($username_search_result = mysqli_query($con, $username_search)) {
 			$username = mysqli_fetch_array($username_search_result)[0]; //use username for display
@@ -20,6 +20,6 @@
 		}
 	} else { //user has a display name
 		$username = $display_name; //user display name for display
-	}
+	}*/
 	include "db_close.php";
 ?>

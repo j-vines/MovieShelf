@@ -27,10 +27,18 @@
 
 		if($num_email == 0 && $num_user == 0) { //the username and email provided are unique
 
-			$user_insert = "INSERT INTO user (username, password, email, joined)
-							VALUES ('".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["email"]."', now());";
+			$user_insert = "INSERT INTO user (username, password, display_name, email, joined)
+							VALUES ('".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["username"]."', '".$_POST["email"]."', now());";
 			if($user_insert_result = mysqli_query($con, $user_insert)) {
-				setcookie("user", $_POST["username"], time() + 86400, "/"); //user cookie has value of user's username.
+				$id_get = "SELECT iduser FROM user WHERE username = '".$_POST["username"]."';";
+				if($id_get_result = mysqli_query($con, $id_get)) {
+					$id = mysqli_fetch_array($id_get_result)[0];
+					setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
+				} else {
+					echo("User ID not found.");
+					echo mysqli_error();
+				}
+				
 			} else {
 				echo("User could not be created.");
 				echo mysqli_error();

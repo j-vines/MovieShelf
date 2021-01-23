@@ -5,5 +5,6 @@
 <file name="db_connect.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556801069872397" remote="132556801940000000" Dst="1" />
 <file name="db_close.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556801340494282" remote="132556802190000000" Dst="1" />
 <file name="loginFunctions.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556685915662183" remote="132556687930000000" Dst="1" />
-<file name="get_display_name.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556799593310814" remote="132556800560000000" Dst="1" />
+<file name="get_display_name.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132558287946098010" remote="132558288050000000" Dst="1" />
+<file name="get_user_info.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132558353435158231" remote="132558354510000000" Dst="1" />
 </dwsync>

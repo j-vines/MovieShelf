@@ -23,11 +23,11 @@
 						$id_get = "SELECT iduser FROM user WHERE username = '".$_POST["username"]."';";
 						if($id_get_result = mysqli_query($con, $id_get)) {
 							$id = mysqli_fetch_array($id_get_result)[0];
+							setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
 						} else {
 							echo("User ID not found.");
 							echo mysqli_error();
 						}
-						setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
 						
 					} else { //user exists but password is incorrect
 						setcookie("login_error", "Incorrect username or password.", time() + 86400, "/");

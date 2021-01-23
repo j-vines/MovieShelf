@@ -9,14 +9,16 @@
 </head>
 
 <body>
-	<form autocomplete="off" action="save_profile.php" method="post">
+	<form autocomplete="off" action="save_profile.php" method="post" enctype="multipart/form-data">
 		<label for="display_name">Display Name:</label>
 		<input type="text" id="display_name" name="display_name"> <!-- NEEDS PATTERN -->
 		<br>
 		<label for="bio">Bio:</label>
 		<textarea maxlength="250" rows = "5" cols = "60" id="bio" name = "bio"></textarea>
 		<br>
-			
+		<!--<label for="pic">Profile picture:</label>
+		<input type="file" id="pic" name="pic">
+		<br>-->
 		<input type="submit" value="Save Changes">
 		
 	

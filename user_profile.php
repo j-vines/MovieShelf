@@ -1,23 +1,24 @@
-<?php 
+<?php
 	include "common_header.php";
+	include "scripts/get_user_info.php";
 ?>
+
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Profile</title>
-<link rel="stylesheet" href="css/profile_styles.css">
+<meta charset="utf-8">
+<title><?php echo($display_name."'s Profile"); ?></title>
 </head>
+<link rel="stylesheet" href="css/profile_styles.css">
+
 <body>
 	<div class="profileContent">
 		<?php
 			//Title of user's profile
-			include "scripts/get_display_name.php";
-		
 			echo("<h2 class='profileTitle'>".$display_name."'s Profile</h2>");
+			echo("Member since: ".$date_joined."<br>");
+			echo("Last active: ".$last_login);
 		?>
-		<!-- Links to form for editing user profile -->
-		<a href = 'edit_profile.php'> Edit </a>
 		<div class="profilePic">
 			<?php
 			//look for profile picture -- if not found, put default pic
@@ -29,24 +30,13 @@
 		<div class="profileBio">
 			<?php
 			//look for bio -- if not found, fill with default text
-			include "scripts/db_connect.php";
-			
-			$bio_search = "SELECT bio FROM user WHERE iduser ='".$_COOKIE["user"]."';";
-			if($bio_search_result = mysqli_query($con, $bio_search)) {
-				$bio = mysqli_fetch_array($bio_search_result)[0];
-			} else {
-				echo("No result.");
-				echo mysqli_error();
-			}
-			
 			if($bio == null) { //user has not defined a bio
-				echo("<p>You have not written a bio.");
+				echo("<p>User has not written a bio.");
 			} else {
 				echo("<p>".$bio."<p>");
 			}
 			?>
 		</div>
 	</div>
-	
 </body>
 </html>
