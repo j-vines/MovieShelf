@@ -24,7 +24,7 @@
 			//look for profile picture -- if not found, put default pic
 			
 			?>
-			<img src="image_uploads/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
+			<img src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
 		</div>
 		
 		<div class="profileBio">

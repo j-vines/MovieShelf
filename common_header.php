@@ -5,9 +5,9 @@
 	//CHECK IF USER COOKIE IS SET. IF NOT, DISPLAY LOGIN BUTTON, IF SO, DISPLAY WELCOME MESSAGE AND SIGN IN BUTTON
 	if(isset($_COOKIE["user"])) {
 		include "scripts/get_display_name.php";
-		$login_message_content = "Welcome, ".$display_name."!"
-									."<br><form action='signout.php' method='post'>
-    									<input type='submit' name='signout' id='signout' value='Sign Out' /><br/>
+		$login_message_content = "<div id='welcomeMessage'>Welcome, ".$display_name."!</div>"
+									."<form action='signout.php' method='post'>
+    									<input id='signoutButton' type='submit' name='signout' id='signout' value='Sign Out' /><br/>
 										</form>";
 	} else {
 		$login_message_content = "<button class = 'button' type='button' onClick='displayForm()'>Log In</button>";
@@ -57,7 +57,7 @@
 		</div>
 		
 		<div class = "logo">
-			<a href = "index.php">MovieShelf</a>
+			<a href = "index.php"><img alt="Logo not found" src="images/ms_logo_white.png" width="20%"></a>
 		</div>
 		
 	</div>

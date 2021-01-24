@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/profile_styles.css">
 </head>
 <body>
-	<div class="profileContent">
+	<div class="mainContent">
 		<?php
 			//Title of user's profile
 			include "scripts/get_display_name.php";
@@ -23,7 +23,7 @@
 			//look for profile picture -- if not found, put default pic
 			
 			?>
-			<img src="image_uploads/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
+			<img src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
 		</div>
 		
 		<div class="profileBio">

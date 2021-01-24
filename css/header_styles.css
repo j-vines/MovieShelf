@@ -5,14 +5,39 @@ a {
 	text-decoration: none;
 }
 
-.error {
-	color: red;
+body {
+	background-color: grey;
+	font-family: Ariel, sans-serif;
 }
 
-.button {
-	padding: 10px;
+
+/* Buttons and submit buttons look the same */
+button, input[type=submit] {
+	
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	font-size: 15px;
 	border: none;
+	background-color: black;
+	color: white;
+}
+
+button:hover, input[type=submit]:hover {
+	background-color: darkslateblue;
+}
+
+.mainContent {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	background-color: lightsteelblue;
+	padding: 10px;
+}
+
+.error {
+	color: red;
 }
 
 /* Either displays login button or static message welcoming user with option to sign out */
@@ -39,7 +64,7 @@ a {
 .logo {
 	padding:20px;
 	font-size: 35px;
-	background-color: grey;
+	background-image: linear-gradient(grey, black);
 }
 
 .links {
@@ -47,7 +72,7 @@ a {
 	text-align: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	background-color: grey;
+	background-color: black;
 	position: sticky;
 	top: 0;
 }
@@ -55,9 +80,22 @@ a {
 .links a {
 	padding: 20px;
 	font-size: 25px;
+	font-weight: bold;
+	color: white;
 	
 }
 
 .links a:hover {
-	background-color: darkcyan;
+	background-color: darkslateblue;
+	
+}
+
+#signoutButton {
+	
+}
+
+#welcomeMessage {
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
 }
