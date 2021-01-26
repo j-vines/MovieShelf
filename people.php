@@ -11,7 +11,7 @@
 <body>
 	<div class="mainContent">
 	<div class="searchBar">
-	<form id="userSearch" autocomplete="off" action="people.php" method="post">
+	<form id="userSearch" autocomplete="off" action="people.php" method="get">
 		
 		<label for="username">Find MovieShelf members:</label>
   		<input type="text" id="search" name="search">
@@ -21,7 +21,7 @@
 	</div>
 	
 	<?php
-	if (isset($_POST['search'])) {
+	if (isset($_GET['search'])) {
 		require "people_search.php";
 		
 		

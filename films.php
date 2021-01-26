@@ -11,7 +11,7 @@
 <body>
 	<div class="mainContent">
 	<div class="searchBar">
-	<form id="filmSearch" autocomplete="off" action="films.php" method="post">
+	<form id="filmSearch" autocomplete="off" action="films.php" method="get">
 		
 		<label for="film_name">Find a Film:</label>
   		<input type="text" id="search" name="search">
@@ -21,7 +21,7 @@
 	</div>
 	
 	<?php
-	if (isset($_POST['search'])) {
+	if (isset($_GET['search'])) {
 		require "film_search.php";
 		
 		if($film_search_result) { //if no error resulted from search

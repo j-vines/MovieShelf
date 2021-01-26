@@ -27,8 +27,8 @@
 
 		if($num_email == 0 && $num_user == 0) { //the username and email provided are unique
 
-			$user_insert = "INSERT INTO user (username, password, display_name, email, joined)
-							VALUES ('".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["username"]."', '".$_POST["email"]."', now());";
+			$user_insert = "INSERT INTO user (username, password, display_name, email, joined, last_login)
+							VALUES ('".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["username"]."', '".$_POST["email"]."', now(), now());";
 			if($user_insert_result = mysqli_query($con, $user_insert)) {
 				$id_get = "SELECT iduser FROM user WHERE username = '".$_POST["username"]."';";
 				if($id_get_result = mysqli_query($con, $id_get)) {

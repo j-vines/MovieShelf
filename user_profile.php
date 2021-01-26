@@ -17,7 +17,18 @@
 			//Title of user's profile
 			echo("<h2 class='profileTitle'>".$display_name."'s Profile</h2>");
 			echo("Member since: ".$date_joined."<br>");
-			echo("Last active: ".$last_login);
+			
+			//display when user was last active
+			$days = (strtotime(date("Y-m-d")) - strtotime($last_login))/(60*60*24);
+
+			if($days == 0) { //user active less than 24 hours ago
+				echo("Last active today");
+			} else if($days == 1) {
+				echo("Last active yesterday");
+			} else { //user last active more than 1 day ago
+				echo("Last active ".$days." days ago");
+			}
+			
 		?>
 		<div class="profilePic">
 			<?php

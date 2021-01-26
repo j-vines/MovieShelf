@@ -24,6 +24,14 @@
 						if($id_get_result = mysqli_query($con, $id_get)) {
 							$id = mysqli_fetch_array($id_get_result)[0];
 							setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
+							
+							//set the users last-login date
+							$set_last_login = "UPDATE user SET last_login=now() WHERE iduser='".$id."';";
+							if(!($last_login = mysqli_query($con, $set_last_login))) {
+								//last login could not be set
+								echo("Last login could not be set.");
+								echo mysqli_error($con);
+							}
 						} else {
 							echo("User ID not found.");
 							echo mysqli_error($con);
