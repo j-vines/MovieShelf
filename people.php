@@ -24,15 +24,18 @@
 	if (isset($_POST['search'])) {
 		require "people_search.php";
 		
-		if(mysqli_num_rows($user_search_result) > 0){
-			$user_count = 0; //incremented total of users found in search
-			while($results = mysqli_fetch_array($user_search_result)) {
-				
-				echo("<form action='user_profile.php' method='post'><input type='hidden' name='userid' value='".$results["iduser"]."'><input type='submit' value='".$results["display_name"]." - ".$results["username"]."'></form><br>");
-				$user_count += 1;
+		
+		if($user_search_result) { //if no error resulted from search
+			if(mysqli_num_rows($user_search_result) > 0){
+				$user_count = 0; //incremented total of users found in search
+				while($results = mysqli_fetch_array($user_search_result)) {
+
+					echo("<form action='user_profile.php' method='post'><input type='hidden' name='userid' value='".$results["iduser"]."'><input type='submit' value='".$results["display_name"]." - ".$results["username"]."'></form><br>");
+					$user_count += 1;
+				}
+			} else {
+				echo "No results found";
 			}
-		} else {
-			echo "No results found";
 		}
 	}
 	
@@ -47,9 +50,9 @@
 			//display total of users found
 			if($user_count != null) {
 				if($user_count > 1) {
-					echo("Found ".$user_count." members.");
+					echo("Found ".$user_count." members");
 				} else {
-					echo("Found ".$user_count." member.");
+					echo("Found ".$user_count." member");
 				}
 				
 			}

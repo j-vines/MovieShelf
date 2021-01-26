@@ -10,7 +10,7 @@
 				//display name was successfully updated
 			} else {
 				echo("Display name could not be updated.");
-				echo mysqli_error();
+				echo mysqli_error($con);
 			}
 	}
 	
@@ -21,7 +21,7 @@
 				//bio was successfully updated
 			} else {
 				echo("Bio could not be updated.");
-				echo mysqli_error();
+				echo mysqli_error($con);
 			}
 	}
 

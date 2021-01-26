@@ -26,7 +26,7 @@
 							setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
 						} else {
 							echo("User ID not found.");
-							echo mysqli_error();
+							echo mysqli_error($con);
 						}
 						
 					} else { //user exists but password is incorrect
@@ -35,7 +35,7 @@
 					
 				} else {
 					echo("Password not found.");
-					echo mysqli_error();
+					echo mysqli_error($con);
 				}
 					
 			} else { //provided username not found in database
@@ -44,7 +44,7 @@
 			
 		} else {
 			echo("No result.");
-			echo mysqli_error();
+			echo mysqli_error($con);
 		}
 	
 	} else { //fields left blank

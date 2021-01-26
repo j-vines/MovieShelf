@@ -70,7 +70,7 @@
 			}
 		?>
 			<a href = "people.php"> PEOPLE </a>
-			<a href = "#films"> FILMS </a>
+			<a href = "films.php"> FILMS </a>
 		</div>
 </body>
 	

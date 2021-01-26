@@ -36,7 +36,7 @@
 				$bio = mysqli_fetch_array($bio_search_result)[0];
 			} else {
 				echo("No result.");
-				echo mysqli_error();
+				echo mysqli_error($con);
 			}
 			
 			if($bio == null) { //user has not defined a bio

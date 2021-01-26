@@ -13,7 +13,7 @@
 			$num_email = mysqli_fetch_array($email_search_result)[0];
 		} else {
 			echo("No result.");
-			echo mysqli_error();
+			echo mysqli_error($con);
 		}
 
 		//check to see if account with certain username already exists
@@ -22,7 +22,7 @@
 			$num_user = mysqli_fetch_array($user_search_result)[0];
 		} else {
 			echo("No result.");
-			echo mysqli_error();
+			echo mysqli_error($con);
 		}
 
 		if($num_email == 0 && $num_user == 0) { //the username and email provided are unique
@@ -36,12 +36,12 @@
 					setcookie("user", $id, time() + 86400, "/"); //user cookie has value of user's id.
 				} else {
 					echo("User ID not found.");
-					echo mysqli_error();
+					echo mysqli_error($con);
 				}
 				
 			} else {
 				echo("User could not be created.");
-				echo mysqli_error();
+				echo mysqli_error($con);
 			}
 		
 		} else { //"reload" signup.php and notify that user already exists
