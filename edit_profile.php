@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Edit Profile</title>
+<title>Edit Your Profile</title>
 </head>
 
 <body>
+	<div class="mainContent">
 	<form autocomplete="off" action="save_profile.php" method="post" enctype="multipart/form-data">
 		<label for="display_name">Display Name:</label>
 		<input type="text" id="display_name" name="display_name"> <!-- NEEDS PATTERN -->
@@ -20,7 +21,8 @@
 		<input type="file" id="pic" name="pic">
 		<br>-->
 		<input type="submit" value="Save Changes">
-		
+	</form>
+	</div>
 	
 	
 </body>

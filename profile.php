@@ -17,13 +17,14 @@
 			echo("<h2 class='profileTitle'>".$display_name."'s Profile</h2>");
 		?>
 		<!-- Links to form for editing user profile -->
-		<a href = 'edit_profile.php'> Edit </a>
+		<button onClick="location.href='edit_profile.php'">Edit Profile</button>
+		<div class="personalInfo">
 		<div class="profilePic">
 			<?php
 			//look for profile picture -- if not found, put default pic
 			
 			?>
-			<img src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
+			<img width=80% src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
 		</div>
 		
 		<div class="profileBio">
@@ -45,6 +46,7 @@
 				echo("<p>".$bio."<p>");
 			}
 			?>
+		</div>
 		</div>
 	</div>
 	

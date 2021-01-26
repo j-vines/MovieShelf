@@ -17,15 +17,15 @@
 <file name="signup.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556686542077944" remote="132556687930000000" Dst="1" />
 <file name="login.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561171693329975" remote="132561171740000000" Dst="1" />
 <file name="index.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556685915616449" remote="132556687910000000" Dst="1" />
-<file name="profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132560981784870668" remote="132560984310000000" Dst="1" />
+<file name="profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561541708241170" remote="132561541740000000" Dst="1" />
 <file name="README.md" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556580434018991" remote="132556687920000000" Dst="1" />
 <file name="signout.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556685915667144" remote="132556687930000000" Dst="1" />
-<file name="edit_profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132557568158218086" remote="132557575830000000" Dst="1" />
+<file name="edit_profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561526072407827" remote="132561526850000000" Dst="1" />
 <file name="save_profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132560980924947457" remote="132560984320000000" Dst="1" />
 <file name="people.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561163763967811" remote="132561163810000000" Dst="1" />
-<file name="people_search.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561161173102396" remote="132561161290000000" Dst="1" />
-<file name="user_profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561183857187945" remote="132561183930000000" Dst="1" />
+<file name="people_search.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561526456084552" remote="132561526870000000" Dst="1" />
+<file name="user_profile.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561556080162729" remote="132561556140000000" Dst="1" />
 <file name="get_display_name.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132560983406892420" remote="132560984230000000" Dst="1" />
 <file name="films.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561164763672841" remote="132561170750000000" Dst="1" />
-<file name="film_search.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561164560802057" remote="132561170750000000" Dst="1" />
+<file name="film_search.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132561526762597830" remote="132561526850000000" Dst="1" />
 </dwsync>

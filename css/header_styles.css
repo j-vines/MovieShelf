@@ -101,3 +101,19 @@ button:hover, input[type=submit]:hover {
 	font-weight: bold;
 	color: white;
 }
+
+/* Profile page content */
+.personalInfo {
+	text-align: center;
+	margin: auto;
+	padding: 10px;
+	
+}
+.profilePic {
+	display: inline-block;
+}
+.profileBio {
+	text-align: left;
+	display: inline-block;
+	width: 20%;
+}

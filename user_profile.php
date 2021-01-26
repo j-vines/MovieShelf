@@ -16,26 +16,27 @@
 		<?php
 			//Title of user's profile
 			echo("<h2 class='profileTitle'>".$display_name."'s Profile</h2>");
-			echo("Member since: ".$date_joined."<br>");
+			echo("Member since: ".date("F d, Y", strtotime($date_joined))."<br>");
 			
 			//display when user was last active
-			$days = (strtotime(date("Y-m-d")) - strtotime($last_login))/(60*60*24);
+			$days = floor((strtotime(date("Y-m-d")) - strtotime($last_login))/(60*60*24));
 
 			if($days == 0) { //user active less than 24 hours ago
-				echo("Last active today");
+				echo("Last active: today");
 			} else if($days == 1) {
-				echo("Last active yesterday");
+				echo("Last active: yesterday");
 			} else { //user last active more than 1 day ago
-				echo("Last active ".$days." days ago");
+				echo("Last active: ".$days." days ago");
 			}
 			
 		?>
+		<div class="personalInfo">
 		<div class="profilePic">
 			<?php
 			//look for profile picture -- if not found, put default pic
 			
 			?>
-			<img src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
+			<img width=80% src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
 		</div>
 		
 		<div class="profileBio">
@@ -47,6 +48,7 @@
 				echo("<p>".$bio."<p>");
 			}
 			?>
+		</div>
 		</div>
 	</div>
 </body>
