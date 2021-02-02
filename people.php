@@ -50,9 +50,9 @@
 			//display total of users found
 			if($user_count != null) {
 				if($user_count > 1) {
-					echo("Found ".$user_count." members");
+					echo("Found ".$user_count." members<br>");
 				} else {
-					echo("Found ".$user_count." member");
+					echo("Found ".$user_count." member<br>");
 				}
 				
 			}
@@ -61,3 +61,4 @@
 	
 </body>
 </html>
+<?php include "common_footer.php"; ?>

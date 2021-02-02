@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	
 	$login_message_content = "";
 	//CHECK IF USER COOKIE IS SET. IF NOT, DISPLAY LOGIN BUTTON, IF SO, DISPLAY WELCOME MESSAGE AND SIGN IN BUTTON
 	if(isset($_COOKIE["user"])) {
@@ -71,7 +70,7 @@
 		?>
 			<a href = "people.php"> PEOPLE </a>
 			<a href = "films.php"> FILMS </a>
-		</div>
+	</div>
 </body>
 	
 </html>
