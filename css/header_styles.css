@@ -29,6 +29,10 @@ button:hover, input[type=submit]:hover, input[type=button]:hover {
 	background-color: darkslateblue;
 }
 
+button:focus {
+	outline: none;
+}
+
 .mainContent {
 	width: 80%;
 	margin: auto;

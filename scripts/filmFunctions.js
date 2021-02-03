@@ -1,8 +1,8 @@
 /* Functions for searching and displaying results from the TMDb API */
 var numResults = 0;
 var apiKey = "444952e78bcc4ff9123cbb5ec23e628f"; 
-var posterUrlBase = "http://image.tmdb.org/t/p/";
-var posterSize = "w185";
+var posterUrlBase = "http://image.tmdb.org/t/p/"; //base location for poster images
+var posterSize = "w185"; //file size for poster displaying
 
 
 
@@ -75,13 +75,35 @@ function showMore(filmId) {
 			filmBoxContent.appendChild(releaseYear);
 			//gen poster
 			var poster = document.createElement('img');
+			poster.className = "poster";
 			poster.src = posterUrlBase + posterSize + data.poster_path;
 			poster.alt = "Missing poster"
 			filmBoxContent.appendChild(poster);
+			//show overview button
+			var showOverview = document.createElement('button');
+			showOverview.className = "showOverview";
+			showOverview.id = "showOverview";
+			showOverview.innerHTML = "Show Synopsis";
+		
+			showOverview.onclick = function toggleOverview() {
+				var synText = document.getElementById("overview");
+				if(getComputedStyle(synText).display == "none") {
+					synText.style.display = "block";
+					document.getElementById("showOverview").innerHTML = "Hide Synopsis";
+				} else {
+					synText.style.display = "none";
+					document.getElementById("showOverview").innerHTML = "Show Synopsis";
+				}
+				
+			};
+			filmBoxContent.appendChild(showOverview);
 			//overview
 			var overview = document.createElement('p');
+			overview.className = "overview";
+			overview.id = "overview";
 			overview.innerHTML = data.overview;
 			filmBoxContent.appendChild(overview);
+			
 			//add to collection button
 			var addForm = document.createElement('form');
 			addForm.method = "get";
