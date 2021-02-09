@@ -21,10 +21,10 @@
 	
 	</form>
 	</div>
-	<div id="filmBox" class="filmBox"> <!-- modal box that displays film information -->
-		<div id="filmBoxContent" class="filmBoxContent">
-			<button id="close" onClick="closeFilmBox()">Close</button>
-    		
+	<div id="addFilm" class="addFilm"> <!-- modal box that displays film information -->
+		<div id="addFilmContent" class="addFilmContent">
+			<button id="close" onClick="closeAddFilm()">Close</button>
+    		Hey
 		</div>
 		
 	</div>

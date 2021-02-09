@@ -1,4 +1,4 @@
-.filmBox {
+.addFilm {
 	display: none; /* Not shown by default */
 	position: fixed; 
 	z-index: 1; 
@@ -11,8 +11,8 @@
 	background-color: rgba(0,0,0,0.4);
 }
 
-.filmBoxContent {
-	background-color: #fefefe;
+.addFilmContent {
+	background-color: lightsteelblue;
 	text-align: center;
 	margin: 15% auto; 
 	padding: 20px;
@@ -20,19 +20,34 @@
 }
 
 .overview {
-	width: 60%;
-	margin: auto;
-	padding: 10px;
-	display: none; /* Not shown by default */
-}
-
-.showOverview {
-	width: 100%;
-	background-color: white;
-	color: black;
-	padding: 20px;
+	width: 40%;
 }
 
 .showOverview:hover {
-	background-color: grey;
+	background-color: slategrey;
+}
+
+.filmBox {
+	background-color: black;
+	margin: auto;
+	width: 85%;
+	color: white;
+	padding: 10px;
+}
+
+.poster {
+	border: 2px solid darkSlateBlue;
+	float: left;
+	margin-left: 10px;
+}
+
+.titleCard {
+	display: inline-block;
+	margin-left: 10px;
+	text-align: left;
+	float: left;
+}
+
+.addButton {
+	width: 100%;
 }

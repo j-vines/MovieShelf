@@ -2,16 +2,14 @@
 var numResults = 0;
 var apiKey = "444952e78bcc4ff9123cbb5ec23e628f"; 
 var posterUrlBase = "http://image.tmdb.org/t/p/"; //base location for poster images
-var posterSize = "w185"; //file size for poster displaying
-
-
+var posterSize = "w154"; //file size for poster displaying
 
 /* Closes the box for more info about a specific film */
-function closeFilmBox() {
-	var filmBox = document.getElementById("filmBox");
-	filmBox.style.display = "none";
-	var filmBoxContent = document.getElementById("filmBoxContent");
-	filmBoxContent.innerHTML = "<button id='close' onClick='closeFilmBox()'>Close</button>";
+function closeAddFilm() {
+	var addFilm = document.getElementById("addFilm");
+	addFilm.style.display = "none";
+	var addFilmContent = document.getElementById("addFilmContent");
+	addFilmContent.innerHTML = "<button id='close' onClick='closeAddFilm()'>Close</button>";
 }
 
 /* Build and make an API request based on search form data */
@@ -43,74 +41,82 @@ function filmSearch() {
 /* Create link to a film's description page and add it to results page*/
 function display(film, resultWindow) {
 	console.log(film);
+	var filmBox = document.createElement("div"); //contains all movie info
+	filmBox.className = "filmBox";
 	
+	//gen poster
+	var poster = document.createElement('img');
+	poster.className = "poster";
+	poster.src = posterUrlBase + posterSize + film.poster_path;
+	poster.alt = "Missing poster"
+	filmBox.appendChild(poster);
+	
+	//var release = new Date(film.release_date);
+	var titleCard = document.createElement('div');
+	titleCard.className = "titleCard";
+	var title = document.createElement('h1');
+	title.innerHTML = film.title;
+	titleCard.appendChild(title);
+	//gen release date
+	var releaseYear = document.createElement('h2');
 	var release = new Date(film.release_date);
+	releaseYear.innerHTML = release.getFullYear();
+	titleCard.appendChild(releaseYear);
+	
+	//overview
+	/*var overview = document.createElement('p');
+	overview.className = "overview";
+	overview.id = "overview";
+	overview.innerHTML = film.overview;
+	titleCard.appendChild(overview);*/
+	
+	filmBox.appendChild(titleCard);
+	
+	//add film button
+	var addButton = document.createElement('button');
+	addButton.className = "addButton";
+	addButton.id = "addButton";
+	addButton.innerHTML = "Add to Your Collection";
+		
+	addButton.onclick = function addFilm() {
+		/*var synText = document.getElementById("overview");
+		if(getComputedStyle(synText).display == "none") {
+			synText.style.display = "block";
+			document.getElementById("showOverview").innerHTML = "Hide Synopsis";
+		} else {
+			synText.style.display = "none";
+			document.getElementById("showOverview").innerHTML = "Show Synopsis";
+		}*/
+		document.getElementById("addFilm").style.display = "block";
+				
+	};
+			
+	filmBox.appendChild(addButton);
+	
+	
+				
+	//show genres
+	/*var genreListText = "";
+	for(let index in film.genres) {
+		genreListText = genreListText + film.genres[index].name + ", ";
+	}
+	genreListText = genreListText.slice(0, -2);
+	var genreList = document.createElement('p');
+	genreList.innerHTML = genreListText;
+	console.log(genreListText);
+	filmBox.appendChild(genreList); //add poster div (contains poster and genre list)*/
+	
 
-	var button = document.createElement('div'); //button has format "Title (Year)"
-	button.innerHTML = "<button type='button'onClick='showMore("+film.id+")'>"+film.title+" ("+release.getFullYear()+")</button><br><br>";
-	resultWindow.appendChild(button);
+	resultWindow.appendChild(filmBox);
+	var breakLine = document.createElement("br");
+	resultWindow.appendChild(breakLine);
 }
 
 /* Show modal box with more info on specific film */
+//FUNCTION THAT OPENS MODAL SHOULD NOW OPEN FORM CONTAINING INFO TO ADD TO FILM TABLE
 function showMore(filmId) {
-	//console.log("Showing info on film with id="+filmId);
-	var filmBox = document.getElementById("filmBox");
+	var filmBox = document.getElementById("addFilm");
 	filmBox.style.display = "block";
-	
-	var query = "https://api.themoviedb.org/3/movie/"+filmId+"?api_key="+apiKey+"&language=en-US";
-	
-	fetch(query)
-  		.then(response => response.json())
-  		.then(function(data) { 
-			//create info to be displayed in more info box
-			var filmBoxContent = document.getElementById("filmBoxContent");
-			//gen title
-			var title = document.createElement('h2');
-			title.innerHTML = data.title;
-			filmBoxContent.appendChild(title);
-			//gen release date
-			var releaseYear = document.createElement('h3');
-			var release = new Date(data.release_date);
-			releaseYear.innerHTML = release.getFullYear();
-			filmBoxContent.appendChild(releaseYear);
-			//gen poster
-			var poster = document.createElement('img');
-			poster.className = "poster";
-			poster.src = posterUrlBase + posterSize + data.poster_path;
-			poster.alt = "Missing poster"
-			filmBoxContent.appendChild(poster);
-			//show overview button
-			var showOverview = document.createElement('button');
-			showOverview.className = "showOverview";
-			showOverview.id = "showOverview";
-			showOverview.innerHTML = "Show Synopsis";
-		
-			showOverview.onclick = function toggleOverview() {
-				var synText = document.getElementById("overview");
-				if(getComputedStyle(synText).display == "none") {
-					synText.style.display = "block";
-					document.getElementById("showOverview").innerHTML = "Hide Synopsis";
-				} else {
-					synText.style.display = "none";
-					document.getElementById("showOverview").innerHTML = "Show Synopsis";
-				}
-				
-			};
-			filmBoxContent.appendChild(showOverview);
-			//overview
-			var overview = document.createElement('p');
-			overview.className = "overview";
-			overview.id = "overview";
-			overview.innerHTML = data.overview;
-			filmBoxContent.appendChild(overview);
-			
-			//add to collection button
-			var addForm = document.createElement('form');
-			addForm.method = "get";
-			addForm.action = "add_film.php";
-			addForm.innerHTML = "<input type='hidden' name='filmId' value='"+data.id+"'><input type='submit' value='Add to Your Collection'></form><br>";
-			filmBoxContent.appendChild(addForm);
-			
-	});
+
 	
 }
