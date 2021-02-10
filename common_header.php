@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/header_styles.css">
+<script src="scripts/cookieFunctions.js"></script>
 <script src="scripts/loginFunctions.js"></script>
 </head>
 	

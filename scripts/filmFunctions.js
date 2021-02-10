@@ -73,25 +73,46 @@ function display(film, resultWindow) {
 	filmBox.appendChild(titleCard);
 	
 	//add film button
+	
 	var addButton = document.createElement('button');
 	addButton.className = "addButton";
 	addButton.id = "addButton";
 	addButton.innerHTML = "Add to Your Collection";
 		
 	addButton.onclick = function addFilm() {
-		/*var synText = document.getElementById("overview");
-		if(getComputedStyle(synText).display == "none") {
-			synText.style.display = "block";
-			document.getElementById("showOverview").innerHTML = "Hide Synopsis";
-		} else {
-			synText.style.display = "none";
-			document.getElementById("showOverview").innerHTML = "Show Synopsis";
-		}*/
 		document.getElementById("addFilm").style.display = "block";
+		document.getElementById("addFilmContent").innerHTML =
+			"<button id='close' onClick='closeAddFilm()'>Close</button><br>"
+			+ "<h2>Adding <span class='addTitle'>" + film.title + " (" + release.getFullYear() + ")</span> to your collection...</h2>"
+			+ "<form id='collectionAdd' autocomplete='off' action='add_film.php' method='post'>"
+			+ "<label for='format'>Format: </label>"
+			+ "<select id='format' name='format'>"
+   			+ "<option value='dvd'>DVD</option>"
+			+ "<option value='bluray'>Blu-ray</option>"
+			+ "<option value='4k'>4k UHD</option>"
+			+ "<option value='other'>Other</option>"
+  			+ "</select>"
+			+ "<br><br>"
+			+ "<label for='shelf'>Shelf: </label>"
+			+ "<select id='shelf' name='shelf'>"
+   			+ "<option value='none'>No shelves</option>"
+  			+ "</select>"
+			+ "<br><br>"
+			+ "<input type='submit' class='addFilmSubmit' value='Add'>"
+			
+			+ "</form><br><br>"
 				
 	};
-			
-	filmBox.appendChild(addButton);
+		
+	if(checkCookie("user")) { //only show add film button if user is signed in
+		filmBox.appendChild(addButton);
+	} else { //show message asking user to sign in
+		var message = document.createElement("div");
+		message.className = "signinMessage";
+		message.innerHTML = "Sign-in to add this film to your collection";
+		filmBox.appendChild(message);
+	}
+	
 	
 	
 				

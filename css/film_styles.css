@@ -33,11 +33,12 @@
 	width: 85%;
 	color: white;
 	padding: 10px;
+	text-align: left;
 }
 
 .poster {
 	border: 2px solid darkSlateBlue;
-	float: left;
+	/*float: left;*/
 	margin-left: 10px;
 }
 
@@ -45,9 +46,24 @@
 	display: inline-block;
 	margin-left: 10px;
 	text-align: left;
-	float: left;
+	/*float: left;*/
 }
 
 .addButton {
 	width: 100%;
+}
+
+.addTitle {
+	font-weight: bolder;
+}
+
+.addFilmSubmit {
+	font-size: large;
+	width: 60%;
+}
+
+.signinMessage {
+	width: 100%;
+	text-align: center;
+	display: block;
 }
