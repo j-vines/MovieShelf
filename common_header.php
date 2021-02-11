@@ -6,7 +6,7 @@
 		include "scripts/get_display_name.php";
 		$login_message_content = "<div id='welcomeMessage'>Welcome, ".$display_name."!</div>"
 									."<form action='signout.php' method='post'>
-    									<input id='signoutButton' type='submit' name='signout' id='signout' value='Sign Out' /><br/>
+    									<input type='submit' name='signout' id='signout' value='Sign Out'><br>
 										</form>";
 	} else {
 		$login_message_content = "<button class = 'button' type='button' onClick='displayForm()'>Log In</button>";
@@ -22,6 +22,56 @@
 </head>
 	
 <body onLoad="init()">
+	<!-- modal box that displays sign up form -->
+	<div id="createAccount" class="createAccount"> 
+		<div id="createAccountContent" class="createAccountContent">
+			<button id="close" onClick="closeCreateAccount()">Close</button>
+			<h1>Create a <img src="images/ms_logo_alt.png" alt="MovieShelf" width="35%"> Account</h1>
+			
+			<form autocomplete="off" action="create_account.php" method="post">
+				<table class="signupForm">
+					<tr>
+						<td align="right">
+							<label for="email">Email:</label>
+						</td>
+						<td align="left">
+							<input type="text" id="email" name="email" 
+				  			 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter a valid email."><br>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<label for="username">Username:</label>
+						</td>
+						<td align="left">
+							<input type="text" id="username" name="username" 
+				   			pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="Enter a valid username."><br>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<label for="password">Password:</label>
+						</td>
+						<td align="left">
+							<input type="password" id="password" name="password" 
+				   			pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
+							<input type="checkbox" onclick="togglePassword()">Show Password<br>
+						</td>
+					</tr>
+				</table>
+				<?php
+					//if last sign up failed, display error message
+					if(isset($_COOKIE["signup_error"])) {
+						echo("<p class='error'>".$_COOKIE["signup_error"]."</p><br>");
+					}
+				?>
+			
+  				<input type="submit" value="Sign Up"><br>
+			</form>
+    		
+		</div>
+		
+	</div>
 	
 	<div class = "header">
 		<!-- Div stores either login button, or, when user is logged in, a welcome message and sign out button -->
@@ -50,10 +100,11 @@
 				<br>
 				
 				<input class="button" type="submit" value="Log In">
-				<button class="button" type="button" onClick="hideForm()">Cancel</button><br>
+				<button class="button" type="button" onClick="hideForm()">Cancel</button><br><br>
 			
-				Don't have an account? <a href="signup.php">Create one!</a>
+				Don't have an account? <button class="smallButton" type="button" onClick="openCreateAccount()">Create one!</button>
 			</form>
+				
 		</div>
 		
 		<div class = "logo">

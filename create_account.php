@@ -47,14 +47,14 @@
 		} else { //"reload" signup.php and notify that user already exists
 			setcookie("signup_error", "That username or email taken.", time() + 86400, "/");
 			include "scripts/db_close.php";
-			header("Location: signup.php");
+			header("Location: index.php");
 			
 		}
 		
 	} else { //fields were left blank
 		setcookie("signup_error", "You left one or more fields blank.", time() + 86400, "/");
 		include "scripts/db_close.php";
-		header("Location: signup.php");
+		header("Location: index.php");
 	}
 
 	include "scripts/db_close.php";

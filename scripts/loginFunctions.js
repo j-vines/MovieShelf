@@ -39,3 +39,13 @@ function togglePassword() {
 		pass.type = "password";
   	}
 }
+
+function openCreateAccount() {
+	var signupForm = document.getElementById("createAccount");
+	signupForm.style.display = "block";
+}
+
+function closeCreateAccount() {
+	var signupForm = document.getElementById("createAccount");
+	signupForm.style.display = "none";
+}

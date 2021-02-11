@@ -20,11 +20,18 @@
 }
 
 .overview {
-	width: 40%;
+	display: none;
+	width: 60%;
+	margin: auto;
+	text-align: center;
 }
 
-.showOverview:hover {
-	background-color: slategrey;
+.overviewButton {
+	width: 100%;
+}
+
+.overviewButton:hover {
+	background-color: darkSlateBlue;
 }
 
 .filmBox {
@@ -66,4 +73,5 @@
 	width: 100%;
 	text-align: center;
 	display: block;
+	color: grey;
 }

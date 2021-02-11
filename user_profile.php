@@ -50,6 +50,15 @@
 			?>
 		</div>
 		</div>
+		<?php 
+			//only show another user's collection if you're signed in
+			if(isset($_COOKIE["user"])) {
+				include("scripts/displayCollection.php"); 
+			} else {
+				echo("<h3>Sign in to view ".$display_name."'s collection</h3>");
+			}
+		
+		?>
 	</div>
 </body>
 </html>

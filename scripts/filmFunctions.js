@@ -40,7 +40,7 @@ function filmSearch() {
 
 /* Create link to a film's description page and add it to results page*/
 function display(film, resultWindow) {
-	console.log(film);
+	var breakLine = document.createElement("br");
 	var filmBox = document.createElement("div"); //contains all movie info
 	filmBox.className = "filmBox";
 	
@@ -63,21 +63,40 @@ function display(film, resultWindow) {
 	releaseYear.innerHTML = release.getFullYear();
 	titleCard.appendChild(releaseYear);
 	
-	//overview
-	/*var overview = document.createElement('p');
-	overview.className = "overview";
-	overview.id = "overview";
-	overview.innerHTML = film.overview;
-	titleCard.appendChild(overview);*/
-	
 	filmBox.appendChild(titleCard);
 	
-	//add film button
+	//overview
+	var overview = document.createElement('p');
+	overview.className = "overview";
+	overview.id = "overview" + film.id; //each overview has unique id for purposes of hiding/displaying
+	overview.innerHTML = film.overview;
 	
+	var overviewButton = document.createElement('button');
+	overviewButton.className = "overviewButton";
+	overviewButton.id = "overviewButton" + film.id;
+	overviewButton.innerHTML = "Read Synopsis";
+		
+	overviewButton.onclick = function showOverview() {
+		var synopsis = document.getElementById("overview" + film.id);
+		var synButton = document.getElementById("overviewButton" + film.id);
+		if(window.getComputedStyle(synopsis).display == "none") {
+			synopsis.style.display = "block";
+			synButton.innerHTML = "Hide Synopsis";
+		} else {
+			synopsis.style.display = "none";
+			synButton.innerHTML = "Read Synopsis";
+		}
+		
+	}
+	filmBox.appendChild(breakLine);
+	filmBox.appendChild(overviewButton);
+	filmBox.appendChild(overview);
+	
+	//add film button
 	var addButton = document.createElement('button');
 	addButton.className = "addButton";
 	addButton.id = "addButton";
-	addButton.innerHTML = "Add to Your Collection";
+	addButton.innerHTML = "<h3>Add to Your Collection</h3>";
 		
 	addButton.onclick = function addFilm() {
 		document.getElementById("addFilm").style.display = "block";
@@ -85,12 +104,17 @@ function display(film, resultWindow) {
 			"<button id='close' onClick='closeAddFilm()'>Close</button><br>"
 			+ "<h2>Adding <span class='addTitle'>" + film.title + " (" + release.getFullYear() + ")</span> to your collection...</h2>"
 			+ "<form id='collectionAdd' autocomplete='off' action='add_film.php' method='post'>"
+			+ "<input type='hidden' id='filmId' name='filmId' value='"+film.id+"'>" //pass api film id to database
+			+ "<input type='hidden' id='posterPath' name='posterPath' value='"+posterUrlBase + posterSize + film.poster_path+"'>" //pass poster path to database
+			+ "<input type='hidden' id='title' name='title' value='"+film.title+"'>" //pass film title to database
+			+ "<input type='hidden' id='releaseDate' name='releaseDate' value='"+release.getFullYear()+"'>"
+			+ "<input type='hidden' id='userId' name='userId' value='"+getCookie("user")+"'>" //pass userid to add script
 			+ "<label for='format'>Format: </label>"
 			+ "<select id='format' name='format'>"
-   			+ "<option value='dvd'>DVD</option>"
-			+ "<option value='bluray'>Blu-ray</option>"
-			+ "<option value='4k'>4k UHD</option>"
-			+ "<option value='other'>Other</option>"
+   			+ "<option value='4'>DVD</option>" // 4 - id for dvd in db
+			+ "<option value='5'>Blu-ray</option>" // 5 - id for bluray in db
+			+ "<option value='6'>4k UHD</option>" // 6 - id for 4k in db
+			+ "<option value='7'>Other</option>"
   			+ "</select>"
 			+ "<br><br>"
 			+ "<label for='shelf'>Shelf: </label>"
@@ -109,7 +133,7 @@ function display(film, resultWindow) {
 	} else { //show message asking user to sign in
 		var message = document.createElement("div");
 		message.className = "signinMessage";
-		message.innerHTML = "Sign-in to add this film to your collection";
+		message.innerHTML = "<h3>Sign-in to add this film to your collection</h3>";
 		filmBox.appendChild(message);
 	}
 	
@@ -129,12 +153,10 @@ function display(film, resultWindow) {
 	
 
 	resultWindow.appendChild(filmBox);
-	var breakLine = document.createElement("br");
 	resultWindow.appendChild(breakLine);
 }
 
 /* Show modal box with more info on specific film */
-//FUNCTION THAT OPENS MODAL SHOULD NOW OPEN FORM CONTAINING INFO TO ADD TO FILM TABLE
 function showMore(filmId) {
 	var filmBox = document.getElementById("addFilm");
 	filmBox.style.display = "block";
