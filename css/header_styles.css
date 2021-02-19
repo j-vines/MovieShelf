@@ -37,7 +37,7 @@ button:focus {
 .createAccount {
 	display: none; /* Not shown by default */
 	position: fixed; 
-	z-index: 1; 
+	z-index: 2; 
 	left: 0;
 	top: 0;
 	width: 100%; 
@@ -216,4 +216,9 @@ button:focus {
 	opacity: 0;
 	transition: .5s ease;
 	background-color: black;
+}
+
+.collectionHeading {
+	background-image: linear-gradient(slategrey, lightsteelblue);
+	padding: 5px;
 }

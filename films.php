@@ -13,7 +13,7 @@
 <body>
 	<div class="mainContent">
 	<div class="searchBar">
-	<form id="filmSearch" autocomplete="off" action="films.php" method="get">
+	<form id="filmSearch" autocomplete="off">
 		
 		<label for="film_name">Find a Film:</label>
   		<input type="text" id="search" name="search">

@@ -48,7 +48,13 @@
 			?>
 		</div>
 		</div>
-		<?php include "scripts/displayCollection.php"?>
+		<?php 
+			include "scripts/displayCollection.php";
+			
+			displayCollection();
+		
+		?>
+		
 	</div>
 	
 </body>

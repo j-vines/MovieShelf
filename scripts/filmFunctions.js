@@ -21,7 +21,6 @@ function filmSearch() {
 	fetch(query)
   		.then(response => response.json())
   		.then(function(data) { //parse and display results from search
-			//console.log(data.results);
 			var filmArray = data.results;
 			for(let index in filmArray){ //results is array of film objects
     			var film = filmArray[index];
@@ -31,7 +30,6 @@ function filmSearch() {
 		})
 		.then(function() {
 			//display number of results posted
-			console.log(numResults);
 			var numDisplay = document.createElement('p');
 			numDisplay.innerHTML = numResults + " films found";
 			document.getElementById("searchResults").appendChild(numDisplay);
