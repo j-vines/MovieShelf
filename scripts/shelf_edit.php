@@ -36,5 +36,6 @@
 	}
 
 	include("db_close.php");
+	header("Location: ../profile.php");
 	
 ?>
