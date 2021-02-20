@@ -54,6 +54,11 @@
 			echo mysqli_error($con);
 		}
 		
+		//if personal profile, show edit shelves button
+		if(!(isset($_POST['userid']))) {
+			echo("<button class='smallButton' onClick='showShelfOptions()'>Edit Shelves</button>");
+		}
+		
 		if(isset($_GET['shelf'])) {
 			if($_GET['shelf'] == 0) { //user chose "display all films"
 				displayAll($collectionUser, $con);

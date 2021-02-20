@@ -21,8 +21,8 @@
 	
 	</form>
 	</div>
-	<div id="addFilm" class="addFilm"> <!-- modal box that displays film information -->
-		<div id="addFilmContent" class="addFilmContent">
+	<div id="addFilm" class="modalBox"> <!-- modal box that displays film information -->
+		<div id="addFilmContent" class="modalBoxContent">
 			<button id="close" onClick="closeAddFilm()">Close</button>
 			
     		

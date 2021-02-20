@@ -19,12 +19,13 @@
 <link rel="stylesheet" href="css/header_styles.css">
 <script src="scripts/cookieFunctions.js"></script>
 <script src="scripts/loginFunctions.js"></script>
+<script src="scripts/collectionFunctions.js"></script>
 </head>
 	
 <body onLoad="init()">
 	<!-- modal box that displays sign up form -->
-	<div id="createAccount" class="createAccount"> 
-		<div id="createAccountContent" class="createAccountContent">
+	<div id="createAccount" class="modalBox"> 
+		<div id="createAccountContent" class="modalBoxContent">
 			<button id="close" onClick="closeCreateAccount()">Close</button>
 			<h1>Create a <img src="images/ms_logo_alt.png" alt="MovieShelf" width="35%"> Account</h1>
 			

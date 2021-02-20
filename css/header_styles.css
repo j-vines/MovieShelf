@@ -34,7 +34,7 @@ button:focus {
 }
 
 /* Modal box that contains sign up form */
-.createAccount {
+.modalBox {
 	display: none; /* Not shown by default */
 	position: fixed; 
 	z-index: 2; 
@@ -47,7 +47,7 @@ button:focus {
 	background-color: rgba(0,0,0,0.4);
 }
 
-.createAccountContent {
+.modalBoxContent {
 	background-color: lightsteelblue;
 	text-align: center;
 	margin: 15% auto; 
@@ -221,4 +221,16 @@ button:focus {
 .collectionHeading {
 	background-image: linear-gradient(slategrey, lightsteelblue);
 	padding: 5px;
+}
+
+/* Shelf editing modal box */
+
+.addShelf {
+	display:none;
+	margin:auto;
+}
+
+.deleteShelf {
+	display:none;
+	margin:auto;
 }
