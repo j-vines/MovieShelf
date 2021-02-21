@@ -24,13 +24,13 @@ function showDeleteShelf() {
 }
 
 function hideButtons() {
-	document.getElementById("addButton").style.display="none";
-	document.getElementById("deleteButton").style.display="none";
+	document.getElementById("addShelfButton").style.display="none";
+	document.getElementById("deleteShelfButton").style.display="none";
 }
 
 function showButtons() {
-	document.getElementById("addButton").style.display="block";
-	document.getElementById("deleteButton").style.display="block";
+	document.getElementById("addShelfButton").style.display="block";
+	document.getElementById("deleteShelfButton").style.display="block";
 }
 
 function cancelOp() {
