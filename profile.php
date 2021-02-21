@@ -50,18 +50,19 @@
 		<!-- Modal box that contains options for adding and deleting shelves -->
 		<div class="modalBox" id="shelfOptions">
 			<div class="modalBoxContent" id="shelfOptionsContent">
-				<button id="close" onClick="closeShelfOptions()">Close</button><br><br><br>
-				<button onClick="showAddShelf()" id="addButton">Create New Shelf</button><br><br>
+				<button id="close" onClick="closeShelfOptions()">Close</button>
+				<button onClick="showAddShelf()" id="addShelfButton">CREATE NEW SHELF</button>
 				<div id="addShelf" class='addShelf'>
-					<form action="scripts/shelf_edit.php" method="post">
+					<h2>Creating a new shelf</h2>
+					<form action="scripts/shelf_edit.php" autocomplete="off" method="post">
 						<input type="hidden" name="create" id="create" value="create">
-						<table>
+						<table class="addShelfForm">
 							<tr>
 								<td align="right">
 									<label for="shelfName">Name of Shelf:</label>
 								</td>
 								<td align="left">
-									<input type="text" id="shelfName" name="shelfName"><br>
+									<input type="text" id="shelfName" name="shelfName">
 								</td>
 							</tr>
 							<tr>
@@ -69,16 +70,17 @@
 									<label for="shelfDesc">Description:</label>
 								</td>
 								<td align="left">
-									<input type="text" id="shelfDesc" name="shelfDesc"><br>
+									<textarea maxlength="150" rows = "3" id="shelfDesc" name = "shelfDesc"></textarea>
 								</td>
 							</tr>
 						</table>
-						<input type="submit" value="Create">
+						<input class="submitButton" type="submit" value="Create">
 					</form>
-					<button onClick="cancelOp()">Cancel</button><br><br>
+					<button class="cancelButton" onClick="cancelOp()">Cancel</button>
 				</div>
-				<button onClick="showDeleteShelf()" id="deleteButton">Delete Shelf</button><br><br>
+				<button onClick="showDeleteShelf()" id="deleteShelfButton">DELETE SHELF</button>
 				<div id="deleteShelf" class='deleteShelf'>
+				<h2>Deleting a shelf</h2>
 					<?php
 					include("scripts/db_connect.php");
 					//show drop down of existing lists
@@ -92,7 +94,7 @@
 							while($shelf = mysqli_fetch_array($shelf_result)) {
 								echo("<option value='".$shelf["idshelf"]."'>".$shelf["name"]."</option>");
 							}
-							echo("</select><input type='submit' value='Delete'></form>");
+							echo("</select><input class='submitButton' type='submit' value='Delete'></form>");
 						} else {
 							echo("You have no shelves");
 						}
@@ -103,7 +105,7 @@
 					}
 					include("scripts/db_close.php");
 					?>
-					<button onClick="cancelOp()">Cancel</button><br><br>
+					<button class="cancelButton" onClick="cancelOp()">Cancel</button>
 				</div>
 			</div>
 		</div>

@@ -23,8 +23,49 @@
 	</div>
 	<div id="addFilm" class="modalBox"> <!-- modal box that displays film information -->
 		<div id="addFilmContent" class="modalBoxContent">
-			<button id="close" onClick="closeAddFilm()">Close</button>
+			<button id='close' onClick='closeAddFilm()'>Close</button><br>
+			<h2 id="addFilmContentTitle"></h2>
+			<form id='collectionAdd' autocomplete='off' action='add_film.php' method='post'>
+			<input type='hidden' id='filmId' name='filmId' value=''> <!--pass api film id to database-->
+			<input type='hidden' id='posterPath' name='posterPath' value=''><!-- pass poster path to database-->
+			<input type='hidden' id='title' name='title' value=''> <!--pass film title to database-->
+			<input type='hidden' id='releaseDate' name='releaseDate' value=''>
+			<input type='hidden' id='userId' name='userId' value=''> <!--pass userid to add script-->
+			<label for='format'>Format: </label>
+			<select id='format' name='format'>
+   			<option value='4'>DVD</option> <!-- 4 - id for dvd in db -->
+			<option value='5'>Blu-ray</option> <!-- 5 - id for bluray in db-->
+			<option value='6'>4k UHD</option> <!-- 6 - id for 4k in db -->
+			<option value='7'>Other</option>
+  			</select>
+			<br><br>
 			
+			<?php
+				include("scripts/db_connect.php");
+				$shelf_select = "SELECT idshelf, `name` FROM shelf WHERE shelf_user = ".$_COOKIE["user"].";";
+				if($shelf_result = mysqli_query($con, $shelf_select)) {
+					if(mysqli_num_rows($shelf_result) > 0){
+						echo("<label for='shelf'>Shelf: </label>"
+							. "<select id='shelf' name='shelf'>"
+							. "<option value='0'>No shelf selected</option>");
+						while($shelf = mysqli_fetch_array($shelf_result)) {
+							echo("<option value='".$shelf["idshelf"]."'>".$shelf["name"]."</option>");
+						}
+						echo("</select>");
+					} else {
+						echo("You don't have any shelves to add to");
+					}
+				}
+				else {
+					echo("Shelves could not be retrieved");
+					echo mysqli_error($con);
+				}
+				include("scripts/db_close.php");
+			?>
+			<br><br>
+			<input type='submit' class='addFilmSubmit' value='Add'>
+			
+			</form><br><br>
     		
 		</div>
 		

@@ -155,7 +155,7 @@ button:focus {
 }
 .profileBio {
 	text-align: center;
-	display: inline-block;*/
+	display: inline-block;
 	width: 20%;
 }
 
@@ -224,13 +224,46 @@ button:focus {
 }
 
 /* Shelf editing modal box */
+#addShelfButton {
+	margin:auto;
+	margin-top:15px;
+	width:80%;
+	font-size:30px;
+	font-weight: bold;
+}
+
+#deleteShelfButton {
+	margin:auto;
+	margin-top:15px;
+	width:80%;
+	font-size:30px;
+	font-weight: bold;
+}
+
+#shelfOptionsContent {
+	margin: 15% auto; 
+	padding: 20px;
+	width: 40%;
+}
+
+.addShelfForm {
+	width:100%;
+	margin:auto;
+}
 
 .addShelf {
+	width:100%;
 	display:none;
 	margin:auto;
 }
 
 .deleteShelf {
+	width:100%;
 	display:none;
 	margin:auto;
+}
+
+.cancelButton {
+	display: inline-block;
+	margin-top:15px;
 }

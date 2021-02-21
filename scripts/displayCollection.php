@@ -5,8 +5,8 @@
 		include("db_connect.php");
 		$collectionUser;
 		//check if user is viewing another person's collection, if so, display that user's collection
-		if(isset($_POST['userid'])) {
-			$collectionUser = $_POST['userid'];
+		if(isset($_GET['userid'])) {
+			$collectionUser = $_GET['userid'];
 		} else {
 			$collectionUser = $_COOKIE["user"];
 		}
@@ -27,8 +27,13 @@
 		$shelf_select = "SELECT idshelf, `name` FROM shelf WHERE shelf_user = ".$collectionUser.";";
 		if($shelf_result = mysqli_query($con, $shelf_select)) {
 			if(mysqli_num_rows($shelf_result) > 0){
-				echo("<form id='shelfSelect' autocomplete='off' action='profile.php' method='get'>"
-					. "<label for='shelf'>Shelf: </label>"
+				if(isset($_GET['userid'])) {
+					echo("<form id='shelfSelect' autocomplete='off' action='user_profile.php' method='get'>" //if user is viewing other's collection, change form action
+						."<input name='userid' type='hidden' value='".$_GET['userid']."'>"); //and persist $_GET[userid]
+				} else {
+					echo("<form id='shelfSelect' autocomplete='off' action='profile.php' method='get'>");
+				}
+				echo("<label for='shelf'>Shelf: </label>"
 					. "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
 					. "<option>No shelf selected</option>"
 					. "<option value='0'>Show all films</option>");
@@ -46,7 +51,12 @@
 				}
 				echo("</select></form></div>");
 			} else {
-				echo("User has no shelves</div>");
+				if(!(isset($_GET['userid']))) {
+					echo("You have no shelves</div>");
+				} else {
+					echo("User has no shelves</div>");
+				}
+				
 			}
 		}
 		else {
@@ -55,7 +65,7 @@
 		}
 		
 		//if personal profile, show edit shelves button
-		if(!(isset($_POST['userid']))) {
+		if(!(isset($_GET['userid']))) {
 			echo("<button class='smallButton' onClick='showShelfOptions()'>Edit Shelves</button>");
 		}
 		
@@ -95,7 +105,7 @@
 					.$poster["title"]."<br>(".$poster["release_year"].")<br><br>".$format."<br><br><br>");
 
 			//place remove button if viewing personal collection
-			if(!(isset($_POST['userid']))) {
+			if(!(isset($_GET['userid']))) {
 				echo("</div><div class='removeButton'><form action='scripts/remove_film.php' method='post'>"
 					. "<input type='hidden' name='filmId' value='".$poster["idfilm"]."'>"
 					. "<input id='remove' type='submit' value='Remove'></form></div></div></div>");

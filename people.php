@@ -30,7 +30,7 @@
 				$user_count = 0; //incremented total of users found in search
 				while($results = mysqli_fetch_array($user_search_result)) {
 
-					echo("<form action='user_profile.php' method='post'><input type='hidden' name='userid' value='".$results["iduser"]."'><input type='submit' value='".$results["display_name"]." - ".$results["username"]."'></form><br>");
+					echo("<form action='user_profile.php' method='get'><input type='hidden' name='userid' value='".$results["iduser"]."'><input type='submit' value='".$results["display_name"]." - ".$results["username"]."'></form><br>");
 					$user_count += 1;
 				}
 			} else {

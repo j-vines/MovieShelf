@@ -9,6 +9,26 @@
 		echo("<br>".$film_insert);
 	}
 
+	//Get the id of the last inserted film to put it in a shelf if necessary
+	$film_insert = "SELECT max(idfilm) FROM film WHERE film_user = ".$_COOKIE["user"].";";
+	if($film_insert_result = mysqli_query($con, $film_insert)) {
+		$idfilm = mysqli_fetch_array($film_insert_result)[0];
+	} else {
+		echo("film could not be inserted...");
+		echo mysqli_error($con);
+		echo("<br>".$film_insert);
+	}
+
+	if($_POST["shelf"] != 0) { //user is adding film to a shelf
+		$film_insert = "INSERT INTO filmshelf (filmshelf_film, filmshelf_shelf)
+					VALUES (".$idfilm.", ".$_POST["shelf"].");";
+		if(!($film_insert_result = mysqli_query($con, $film_insert))) {
+			echo("film could not be added to provided shelf...");
+			echo mysqli_error($con);
+			echo("<br>".$film_insert);
+		}
+	}
+
 	include "scripts/db_close.php";
 	header("Location: films.php");
 

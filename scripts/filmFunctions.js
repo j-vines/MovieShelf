@@ -8,8 +8,6 @@ var posterSize = "w154"; //file size for poster displaying
 function closeAddFilm() {
 	var addFilm = document.getElementById("addFilm");
 	addFilm.style.display = "none";
-	var addFilmContent = document.getElementById("addFilmContent");
-	addFilmContent.innerHTML = "<button id='close' onClick='closeAddFilm()'>Close</button>";
 }
 
 /* Build and make an API request based on search form data */
@@ -94,35 +92,18 @@ function display(film, resultWindow) {
 	var addButton = document.createElement('button');
 	addButton.className = "addButton";
 	addButton.id = "addButton";
-	addButton.innerHTML = "<h3>Add to Your Collection</h3>";
+	addButton.innerHTML = "<h3>ADD TO YOUR COLLECTION</h3>";
 		
 	addButton.onclick = function addFilm() {
 		document.getElementById("addFilm").style.display = "block";
-		document.getElementById("addFilmContent").innerHTML =
-			"<button id='close' onClick='closeAddFilm()'>Close</button><br>"
-			+ "<h2>Adding <span class='addTitle'>" + film.title + " (" + release.getFullYear() + ")</span> to your collection...</h2>"
-			+ "<form id='collectionAdd' autocomplete='off' action='add_film.php' method='post'>"
-			+ "<input type='hidden' id='filmId' name='filmId' value='"+film.id+"'>" //pass api film id to database
-			+ "<input type='hidden' id='posterPath' name='posterPath' value='"+posterUrlBase + posterSize + film.poster_path+"'>" //pass poster path to database
-			+ "<input type='hidden' id='title' name='title' value='"+film.title+"'>" //pass film title to database
-			+ "<input type='hidden' id='releaseDate' name='releaseDate' value='"+release.getFullYear()+"'>"
-			+ "<input type='hidden' id='userId' name='userId' value='"+getCookie("user")+"'>" //pass userid to add script
-			+ "<label for='format'>Format: </label>"
-			+ "<select id='format' name='format'>"
-   			+ "<option value='4'>DVD</option>" // 4 - id for dvd in db
-			+ "<option value='5'>Blu-ray</option>" // 5 - id for bluray in db
-			+ "<option value='6'>4k UHD</option>" // 6 - id for 4k in db
-			+ "<option value='7'>Other</option>"
-  			+ "</select>"
-			+ "<br><br>"
-			+ "<label for='shelf'>Shelf: </label>"
-			+ "<select id='shelf' name='shelf'>"
-   			+ "<option value='none'>No shelves</option>"
-  			+ "</select>"
-			+ "<br><br>"
-			+ "<input type='submit' class='addFilmSubmit' value='Add'>"
-			
-			+ "</form><br><br>"
+		//Set values of form
+		document.getElementById("addFilmContentTitle").innerHTML = "Adding <span class='addTitle'>" + film.title + " (" + release.getFullYear() + ")</span> to your collection...";
+
+		document.getElementById("filmId").value = film.id //pass api film id to database
+		document.getElementById("posterPath").value = posterUrlBase + posterSize + film.poster_path; //pass poster path to database
+		document.getElementById("title").value = film.title; //pass film title to database
+		document.getElementById("releaseDate").value = release.getFullYear();
+		document.getElementById("userId").value = getCookie("user"); //pass userid to add script
 				
 	};
 		
