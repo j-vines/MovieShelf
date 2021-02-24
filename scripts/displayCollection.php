@@ -4,12 +4,63 @@
 	function displayCollection() {
 		include("db_connect.php");
 		$collectionUser;
+		$collectionUsername;
+		$visiting; //specifies whether user is visting another profile or not
 		//check if user is viewing another person's collection, if so, display that user's collection
 		if(isset($_GET['userid'])) {
 			$collectionUser = $_GET['userid'];
+			$visiting = true;
+			
+			$name_select = "SELECT display_name FROM user WHERE iduser = ".$collectionUser.";";
+			if($name_result = mysqli_query($con, $name_select)) {
+				$collectionUsername = mysqli_fetch_array($name_result)[0];
+			} else {
+				echo("User's display name could not be retreived");
+				echo mysqli_error($con);
+			}
 		} else {
 			$collectionUser = $_COOKIE["user"];
+			$visiting = false;
 		}
+		
+		//create film info modal box
+		echo("
+			<div id='filmInfo' class='modalBox'>
+				<div id='filmInfoContent' class='modalBoxContent'>
+					<button id='close' onClick='closeFilmInfo()'>Close</button>");
+		if($visiting) {
+			echo("<h2>".$collectionUsername." owns <span id='moreInfoTitle'></span> (<span id='moreInfoYear'></span>) on <span id='moreInfoFormat'>");
+		} else {
+			echo("<h2>You own <span id='moreInfoTitle'></span> (<span id='moreInfoYear'></span>) on <span id='moreInfoFormat'>");
+		}
+		echo("</span></h2>
+					<img id='moreInfoPoster'></img>
+					<h3><span id='moreInfoShelves'></span></h3>");
+		
+		if(!$visiting) {
+			//Display form for adding to shelves
+			$shelf_select = "SELECT idshelf, `name` FROM shelf WHERE shelf_user = ".$collectionUser.";";
+			if($shelf_result = mysqli_query($con, $shelf_select)) {
+				if(mysqli_num_rows($shelf_result) > 0){
+					echo("<form id='filmShelfAdd' autocomplete='off' action='scripts/shelf_edit.php' method='post'>");
+
+					echo("<label for='shelf'>Add to shelf: </label>"
+						. "<input type='hidden' value='' name='addFilm' id='addFilm'>" //this value gets set differently for each film
+						. "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
+						. "<option>No shelf selected</option>");
+					while($shelf = mysqli_fetch_array($shelf_result)) {
+						echo("<option value='".$shelf["idshelf"]."'>".$shelf["name"]."</option>");
+					}
+					echo("</select></form>");
+				}
+			}
+			else {
+				echo("Shelves could not be retrieved");
+				echo mysqli_error($con);
+			}
+		}
+		echo("</div></div>");
+		
 
 		//get/display collection count
 		$title_count = "SELECT COUNT(*) FROM film WHERE film_user = ".$collectionUser.";";
@@ -51,7 +102,7 @@
 				}
 				echo("</select></form></div>");
 			} else {
-				if(!(isset($_GET['userid']))) {
+				if(!$visiting) {
 					echo("You have no shelves</div>");
 				} else {
 					echo("User has no shelves</div>");
@@ -65,7 +116,7 @@
 		}
 		
 		//if personal profile, show edit shelves button
-		if(!(isset($_GET['userid']))) {
+		if(!$visiting) {
 			echo("<button class='smallButton' onClick='showShelfOptions()'>Edit Shelves</button>");
 		}
 		
@@ -98,14 +149,16 @@
 
 			if($poster_count % 6 == 0) echo("</tr><tr>"); //every six films, create new row
 
+			$something = getShelves($poster["idfilm"], $con);
+
 			echo("<td class='collectionTableColumn'>");
-			echo("<div class='collectionPosterContainer'>");
+			echo("<div class='collectionPosterContainer' onclick='showFilmInfo(\"".$poster["idfilm"]."\", \"".$poster["title"]."\", \"".$format."\", \"".$poster["release_year"]."\", \"".$poster["poster_path"]."\", ".getShelves($poster["idfilm"], $con).")'>"); //(filmid, title, format, releaseYear, posterPath, shelvesArray)
 			echo("<img class='collectionPoster' src='".$poster["poster_path"]."'>");
 			echo("<div class='collectionTitle'><div class='posterText'>"
 					.$poster["title"]."<br>(".$poster["release_year"].")<br><br>".$format."<br><br><br>");
 
 			//place remove button if viewing personal collection
-			if(!(isset($_GET['userid']))) {
+			if(!$visiting) {
 				echo("</div><div class='removeButton'><form action='scripts/remove_film.php' method='post'>"
 					. "<input type='hidden' name='filmId' value='".$poster["idfilm"]."'>"
 					. "<input id='remove' type='submit' value='Remove'></form></div></div></div>");
@@ -117,6 +170,26 @@
 			$poster_count += 1;
 		}
 		echo("</tr></table><br><br><br>");
+	}
+
+	/* Returns id and names of shelves that a given film is present in */
+	function getShelves($filmId, $con) {
+		$shelf_array = array();
+		
+		$shelf_select = "SELECT idshelf, `name` FROM shelf "
+						."JOIN filmshelf "
+						."ON idshelf = filmshelf_shelf AND filmshelf_film = ".$filmId.";";
+		if($shelf_result = mysqli_query($con, $shelf_select)) {
+			while($shelf = mysqli_fetch_array($shelf_result)) {
+				$shelf_string = $shelf["idshelf"] .":". $shelf["name"]; //create array of strings w/ format "id:name"
+				array_push($shelf_array, $shelf_string);
+			}
+			
+		} else {
+			echo("Shelves could not be retrieved for given film");
+			echo mysqli_error($con);
+		}
+		return json_encode($shelf_array);
 	}
 
 	/* Displays all films in specified shelf */
@@ -131,9 +204,6 @@
 			echo("Shelf name and description could not be retrieved");
 			echo mysqli_error($con);
 		}
-		
-		
-		
 		
 		$poster_select = "SELECT idfilm, poster_path, title, release_year, film_format "
    		."FROM film "

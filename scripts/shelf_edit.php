@@ -7,6 +7,18 @@
 	if(isset($_POST["delete"])) {
 		deleteShelf($con, $_POST["shelf"]);
 	}
+	if(isset($_POST["addFilm"])) {
+		addFilm($con, $_POST["shelf"], $_POST["addFilm"]);
+	}
+
+	/* Add film to a shelf */
+	function addFilm($con, $shelfId, $filmId) {
+		$shelf_insert = "INSERT INTO filmshelf (filmshelf_film, filmshelf_shelf) VALUES (".$filmId.", '".$shelfId."');";
+		if(!($shelf_insert_result = mysqli_query($con, $shelf_insert))) {
+			echo("Film could not be added to shelf.");
+			echo mysqli_error($con);
+		}
+	}
 
 	
 	/* Create shelf with provided name and description */

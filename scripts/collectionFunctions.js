@@ -1,5 +1,5 @@
 
-
+/* Shelf functions */
 function closeShelfOptions() {
 	document.getElementById("shelfOptions").style.display="none";
 	document.getElementById("deleteShelf").style.display="none";
@@ -38,4 +38,28 @@ function cancelOp() {
 	document.getElementById("deleteShelf").style.display="none";
 	document.getElementById("addShelf").style.display="none";
 	
+}
+
+/* More info on film functions */
+
+function showFilmInfo(id, title, format, releaseYear, posterPath, shelvesArray) {
+	document.getElementById("filmInfo").style.display="block";
+	document.getElementById("moreInfoTitle").innerHTML = title;
+	document.getElementById("moreInfoYear").innerHTML = releaseYear;
+	document.getElementById("moreInfoFormat").innerHTML = format;
+	document.getElementById("moreInfoPoster").src = posterPath;
+	document.getElementById("addFilm").value = id;
+	
+	
+	var shelfList = "";
+	for(var i = 0; i < shelvesArray.length; i++) {
+		var shelf = shelvesArray[i].split(":");
+		shelfList = shelfList + shelf[1];
+		if(shelvesArray.length - i != 1) shelfList = shelfList + ", ";
+	}
+	document.getElementById("moreInfoShelves").innerHTML = shelfList;
+}
+
+function closeFilmInfo() {
+	document.getElementById("filmInfo").style.display="none";
 }

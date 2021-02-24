@@ -190,6 +190,10 @@ button:focus {
 	opacity: 1;
 }
 
+.collectionPosterContainer:hover {
+	cursor: pointer;
+}
+
 
 .collectionPoster {
 	width:95%;
