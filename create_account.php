@@ -58,6 +58,6 @@
 	}
 
 	include "scripts/db_close.php";
-	header("Location: index.php");
+	header("Location: profile.php");
 
 ?>

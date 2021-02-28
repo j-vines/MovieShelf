@@ -59,6 +59,6 @@
 		setcookie("login_error", "You left one or more fields blank.", time() + 86400, "/");
 	}
 	include "scripts/db_close.php";
-	header("Location: index.php"); //redirect back to index
+	header("Location: profile.php"); //redirect to profile
 
 ?>

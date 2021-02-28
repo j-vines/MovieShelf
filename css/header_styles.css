@@ -227,6 +227,10 @@ button:focus {
 	padding: 5px;
 }
 
+#moreInfoTitle {
+	font-weight:bolder;
+}
+
 /* Shelf editing modal box */
 #addShelfButton {
 	margin:auto;
