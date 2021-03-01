@@ -26,7 +26,12 @@
 		}
 
 		if($num_email == 0 && $num_user == 0) { //the username and email provided are unique
-
+			
+			//Escape form data to be inserted into database
+			$_POST["username"] = mysqli_real_escape_string($con, $_POST["username"]);
+			$_POST["password"] = mysqli_real_escape_string($con, $_POST["password"]);
+			$_POST["email"] = mysqli_real_escape_string($con, $_POST["email"]);
+			
 			$user_insert = "INSERT INTO user (username, password, display_name, email, joined, last_login)
 							VALUES ('".$_POST["username"]."', '".$_POST["password"]."', '".$_POST["username"]."', '".$_POST["email"]."', now(), now());";
 			if($user_insert_result = mysqli_query($con, $user_insert)) {

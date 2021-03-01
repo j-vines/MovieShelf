@@ -5,6 +5,7 @@
 
 	//update display name
 	if($_POST["display_name"] != "") {
+		$_POST["display_name"] = mysqli_real_escape_string($con, $_POST["display_name"]);
 		$update_display = "UPDATE user SET display_name = '".$_POST["display_name"]."' WHERE iduser ='".$_COOKIE["user"]."';";
 			if($update_display_result = mysqli_query($con, $update_display)) {
 				//display name was successfully updated
@@ -16,6 +17,7 @@
 	
 	//update the bio --> BIOS THAT HAVE APOSTROPHE'S ARE NOT BEING CREATED.
 	if($_POST["bio"] != "") {
+		$_POST["bio"] = mysqli_real_escape_string($con, $_POST["bio"]);
 		$update_bio = "UPDATE user SET bio = '".$_POST["bio"]."' WHERE iduser ='".$_COOKIE["user"]."';"; //SOMETHING'S NOT RIGHT HERE
 			if($update_bio_result = mysqli_query($con, $update_bio)) {
 				//bio was successfully updated

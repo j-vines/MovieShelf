@@ -35,6 +35,9 @@
 	
 	/* Create shelf with provided name and description */
 	function createShelf($con, $shelfName, $shelfDesc) {
+		$shelfName = mysqli_real_escape_string($con, $shelfName);
+		$shelfDesc = mysqli_real_escape_string($con, $shelfDesc);
+		
 		$shelf_insert = "INSERT INTO shelf (shelf_user, `name`, `desc`) VALUES (".$_COOKIE["user"].", '".$shelfName."', '".$shelfDesc."');";
 		if(!($shelf_insert_result = mysqli_query($con, $shelf_insert))) {
 			echo("Shelf could not be created.");

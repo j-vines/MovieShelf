@@ -45,7 +45,7 @@
 							<label for="username">Username:</label>
 						</td>
 						<td align="left">
-							<input type="text" id="username" name="username" 
+							<input type="text" id="username_signup" name="username" 
 				   			pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="Enter a valid username."><br>
 						</td>
 					</tr>
@@ -54,7 +54,7 @@
 							<label for="password">Password:</label>
 						</td>
 						<td align="left">
-							<input type="password" id="password" name="password" 
+							<input type="password" id="password_signup" name="password" 
 				   			pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
 							<input type="checkbox" onclick="togglePassword()">Show Password<br>
 						</td>
@@ -90,11 +90,11 @@
 		<div class = "loginForm" id = "loginForm">
 			<form action = "login.php" method = "post">
 				<label for="username">Username:</label>
-  				<input type="text" id="username" name="username" 
+  				<input type="text" id="username_login" name="username" 
 				  pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$" title="Enter a valid username.">
 				<br>
 				<label for="password">Password:</label>
-  				<input autocomplete="off" type="password" id="password" name="password" 
+  				<input autocomplete="off" type="password" id="password_login" name="password" 
 				  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
 				<br>
 				<input type="checkbox" onclick="togglePassword()">Show Password

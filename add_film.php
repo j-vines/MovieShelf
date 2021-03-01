@@ -1,6 +1,8 @@
 <?php
 	include "scripts/db_connect.php";
 	
+	$_POST["posterPath"] = mysqli_real_escape_string($con, $_POST["posterPath"]);
+	$_POST["title"] = mysqli_real_escape_string($con, $_POST["title"]);
 	$film_insert = "INSERT INTO film (film_user, tmdb_id, acquired, poster_path, film_format, title, release_year)
 					VALUES (".$_POST["userId"].", ".$_POST["filmId"].", now(), '".$_POST["posterPath"]."', ".$_POST["format"].", '".$_POST["title"]."','".$_POST["releaseDate"]."');";
 	if(!($film_insert_result = mysqli_query($con, $film_insert))) {

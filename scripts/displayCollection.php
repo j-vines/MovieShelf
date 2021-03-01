@@ -67,9 +67,8 @@
 					echo("<form id='shelfSelect' autocomplete='off' action='profile.php' method='get'>");
 				}
 				echo("<label for='shelf'>Shelf: </label>"
-					. "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
-					. "<option>No shelf selected</option>"
-					. "<option value='0'>Show all films</option>");
+					. "<select id='shelf_display' name='shelf' onchange='this.form.submit()'>");
+				echo("<option value='0'>Show all films</option>");
 				while($shelf = mysqli_fetch_array($shelf_result)) {
 					
 					if(isset($_GET['shelf'])) { //if you're viewing this shelf, make it default selected value
@@ -134,6 +133,7 @@
 			$something = getShelves($poster["idfilm"], $con);
 
 			echo("<td class='collectionTableColumn'>");
+			//TODO: MODIFY - put vars I need in array, send to client. use eventListener instead of onclick
 			echo("<div class='collectionPosterContainer' onclick='showFilmInfo(\"".$poster["idfilm"]."\", \"".$poster["title"]."\", \"".$format."\", \"".$poster["release_year"]."\", \"".$poster["poster_path"]."\", ".getShelves($poster["idfilm"], $con).", ".getShelvesNotIn($poster["idfilm"], $con).")'>"); //(filmid, title, format, releaseYear, posterPath, shelvesInArray, shelvesNotInArray)
 			echo("<img class='collectionPoster' src='".$poster["poster_path"]."'>");
 			echo("<div class='collectionTitle'><div class='posterText'>"
@@ -143,7 +143,7 @@
 			if(!$visiting) {
 				echo("</div><div class='removeButton'><form action='scripts/remove_film.php' method='post'>"
 					. "<input type='hidden' name='filmId' value='".$poster["idfilm"]."'>"
-					. "<input id='remove' type='submit' value='Remove'></form></div></div></div>");
+					. "<input id='remove".$poster["idfilm"]."' type='submit' value='Remove'></form></div></div></div>");
 			} else {
 				echo("</div></div></div>");
 			}
