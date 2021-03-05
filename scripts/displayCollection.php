@@ -23,23 +23,64 @@
 			$visiting = false;
 		}
 		
+		
+		
 		//create film info modal box
 		echo("
 			<div id='filmInfo' class='modalBox'>
 				<div id='filmInfoContent' class='modalBoxContent'>
+				<div class='modalHeader'>
 					<button id='close' onClick='closeFilmInfo()'>Close</button>");
 		if($visiting) {
 			echo("<h2>".$collectionUsername." owns <span id='moreInfoTitle'></span> (<span id='moreInfoYear'></span>) on <span id='moreInfoFormat'>");
 		} else {
 			echo("<h2>You own <span id='moreInfoTitle'></span> (<span id='moreInfoYear'></span>) on <span id='moreInfoFormat'>");
 		}
-		echo("</span></h2>
-					<img id='moreInfoPoster'></img>
+		
+		
+		
+		echo("</span></h2></div>");
+		if($visiting) { //disable star buttons if you are viewing another user's profile
+			echo("<div class='starRating'>"
+			. "<input type='radio' name='rating' id='5stars' value='5' disabled>"
+			. "<label for='5stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='4stars' value='4' disabled>"
+			. "<label for='4stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='3stars' value='3' disabled>"
+			. "<label for='3stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='2stars' value='2' disabled>"
+			. "<label for='2stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='1star' value='1' disabled>"
+			. "<label for='1star'>&#9733;</label>"
+			. "</div><br>");
+		} else {
+			echo("<form id='moreInfoRating' action='scripts/film_edit.php' method='post'>"
+			. "<input type='hidden' id='ratingId' name='ratingId' value=''>"
+			. "<div class='starRating'>"
+			. "<input type='radio' name='rating' id='5stars' value='5' onclick='this.form.submit()'>"
+			. "<label for='5stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='4stars' value='4' onclick='this.form.submit()'>"
+			. "<label for='4stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='3stars' value='3' onclick='this.form.submit()'>"
+			. "<label for='3stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='2stars' value='2' onclick='this.form.submit()'>"
+			. "<label for='2stars'>&#9733;</label>"
+			. "<input type='radio' name='rating' id='1star' value='1' onclick='this.form.submit()'>"
+			. "<label for='1star'>&#9733;</label></form>"
+			. "</div>");
+		}
+		
+		
+		echo("<img id='moreInfoPoster'></img>
 					<h3><span id='moreInfoShelves'></span></h3>");
 		
 		if(!$visiting) {
 			echo("<div id='moreInfoAddForm'></div>");
 			echo("<div id='moreInfoDeleteForm'></div>");
+			//place remove button if viewing personal collection
+			echo("<div><form action='scripts/remove_film.php' method='post'>"
+				. "<input type='hidden' id='removeFilm' name='filmId' value=''>"
+				. "<input type='submit' value='Remove'></form></div>");
 		}
 		echo("</div></div>");
 		
@@ -54,7 +95,14 @@
 			echo("<br>".$title_count);
 		}
 		
-		echo("<div class='collectionHeading'><h2>Collection (".$count." titles)</h2><br>");
+		if($count > 0) {
+			echo("<div class='collectionHeading'><h2>Collection (".$count." titles)</h2><br>");
+		} else {
+			if($visiting) echo("<div class='collectionHeading'><h2>".$collectionUsername." has not started a collection</h2><br>");
+			else echo("<div class='collectionHeading'><h2>You have not started a collection</h2><br>");
+		}
+		
+		
 		//display shelf options
 		//get shelf options
 		$shelf_select = "SELECT idshelf, `name` FROM shelf WHERE shelf_user = ".$collectionUser.";";
@@ -85,10 +133,7 @@
 			} else {
 				if(!$visiting) {
 					echo("You have no shelves</div>");
-				} else {
-					echo("User has no shelves</div>");
 				}
-				
 			}
 		}
 		else {
@@ -111,6 +156,8 @@
 		} else {
 			displayAll($collectionUser, $visiting, $con); //user has not chosen a shelf
 		}
+		//initialize collectionFunctions.js
+		echo("<script> collectionInit(); </script>");
 		include("db_close.php");
 	}
 
@@ -133,22 +180,26 @@
 			$something = getShelves($poster["idfilm"], $con);
 
 			echo("<td class='collectionTableColumn'>");
-			//TODO: MODIFY - put vars I need in array, send to client. use eventListener instead of onclick
-			echo("<div class='collectionPosterContainer' onclick='showFilmInfo(\"".$poster["idfilm"]."\", \"".$poster["title"]."\", \"".$format."\", \"".$poster["release_year"]."\", \"".$poster["poster_path"]."\", ".getShelves($poster["idfilm"], $con).", ".getShelvesNotIn($poster["idfilm"], $con).")'>"); //(filmid, title, format, releaseYear, posterPath, shelvesInArray, shelvesNotInArray)
+			echo("<div id='".$poster["idfilm"]."'class='collectionPosterContainer'>");
+			
+			//store info needed to be displayed on more info screen in json object that will be stored in javascript
+			$moreInfo = new stdClass();
+			$moreInfo->id = $poster["idfilm"];
+			$moreInfo->title = $poster["title"];
+			$moreInfo->rating = $poster["rating"];
+			$moreInfo->format = $format;
+			$moreInfo->releaseYear = $poster["release_year"];
+			$moreInfo->posterPath = $poster["poster_path"];
+			$moreInfo->shelvesIn = getShelves($poster["idfilm"], $con);
+			$moreInfo->shelvesOut = getShelvesNotIn($poster["idfilm"], $con);
+			
+			echo("<script> storeFilmInfo(".json_encode($moreInfo)."); </script>");
+			
+			
 			echo("<img class='collectionPoster' src='".$poster["poster_path"]."'>");
 			echo("<div class='collectionTitle'><div class='posterText'>"
 					.$poster["title"]."<br>(".$poster["release_year"].")<br><br>".$format."<br><br><br>");
-
-			//place remove button if viewing personal collection
-			if(!$visiting) {
-				echo("</div><div class='removeButton'><form action='scripts/remove_film.php' method='post'>"
-					. "<input type='hidden' name='filmId' value='".$poster["idfilm"]."'>"
-					. "<input id='remove".$poster["idfilm"]."' type='submit' value='Remove'></form></div></div></div>");
-			} else {
-				echo("</div></div></div>");
-			}
-
-			echo("</td>");
+			echo("</div></div></div></td>");
 			$poster_count += 1;
 		}
 		echo("</tr></table><br><br><br>");
@@ -209,7 +260,7 @@
 			echo mysqli_error($con);
 		}
 		
-		$poster_select = "SELECT idfilm, poster_path, title, release_year, film_format "
+		$poster_select = "SELECT idfilm, poster_path, title, release_year, film_format, rating "
    		."FROM film "
    		."JOIN filmshelf "
    		."ON film.idfilm = filmshelf_film AND filmshelf_shelf = ".$shelf.";";
@@ -235,7 +286,7 @@
 	function displayAll($collectionUser, $visiting, $con) {
 		
 		//get/display posters
-		$poster_select = "SELECT idfilm, poster_path, title, release_year, film_format FROM film WHERE film_user = ".$collectionUser.";";
+		$poster_select = "SELECT idfilm, poster_path, title, release_year, film_format, rating FROM film WHERE film_user = ".$collectionUser.";";
 		if($poster_result = mysqli_query($con, $poster_select)) {
 			if(mysqli_num_rows($poster_result) > 0){
 				showPosters($poster_result, $visiting, $con);

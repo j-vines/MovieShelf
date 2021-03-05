@@ -1,4 +1,28 @@
 
+var filmInfoList = [];
+
+function collectionInit() {
+	var posters= document.getElementsByClassName("collectionPosterContainer");
+
+	for(var i = 0; i < posters.length; i++) {
+		posters[i].addEventListener("click", function(e) {
+			var filmId = e.currentTarget.id;
+			//get info about this film from film list using returned filmID, pass to showFilmInfo()
+			for(var j = 0; j < filmInfoList.length; j++) {
+				if(filmInfoList[j].id == filmId) {
+					showFilmInfo(filmInfoList[j]);
+				}
+			}
+			
+		}, false);
+	}
+}
+
+function storeFilmInfo(moreInfo) {
+	//store JSON object containing information about film in array of info objects
+	filmInfoList.push(moreInfo);
+}
+
 /* Shelf functions */
 function closeShelfOptions() {
 	document.getElementById("shelfOptions").style.display="none";
@@ -42,60 +66,104 @@ function cancelOp() {
 
 /* More info on film functions */
 
-function showFilmInfo(id, title, format, releaseYear, posterPath, shelvesInArray, shelvesNotInArray) {
+/* showFilmInfo takes JSON object containing film information and displays it in modal box
+	filmInfo includes fields:
+	id - id in database of film
+	title - title of film
+	format - format user owns film on
+	releaseYear - year of release of film
+	posterPath - image src for film poster
+	shelvesIn - array of shelves film is stored in
+	shelvesOut - array of shelves film is NOT stored in */
+function showFilmInfo(filmInfo) {
+	
 	document.getElementById("filmInfo").style.display="block";
-	document.getElementById("moreInfoTitle").innerHTML = title;
-	document.getElementById("moreInfoYear").innerHTML = releaseYear;
-	document.getElementById("moreInfoFormat").innerHTML = format;
-	document.getElementById("moreInfoPoster").src = posterPath;
+	document.getElementById("moreInfoTitle").innerHTML = filmInfo.title;
+	document.getElementById("moreInfoYear").innerHTML = filmInfo.releaseYear;
+	document.getElementById("moreInfoFormat").innerHTML = filmInfo.format;
+	document.getElementById("moreInfoPoster").src = filmInfo.posterPath;
+	if(document.getElementById("removeFilm")) {
+		document.getElementById("removeFilm").value = filmInfo.id;
+	}
+	if(document.getElementById("ratingId")) {
+		document.getElementById("ratingId").value = filmInfo.id;
+	}
+	
+	switch(filmInfo.rating) {
+		case '1':
+			document.getElementById("1star").checked = true;
+			break;
+		case '2':
+			document.getElementById("2stars").checked = true;
+			break;
+		case '3':
+			document.getElementById("3stars").checked = true;
+			break;
+			
+		case '4':
+			document.getElementById("4stars").checked = true;
+			break;
+			
+		case '5':
+			document.getElementById("5stars").checked = true;
+			break;
+			
+		default:
+			document.getElementById("1star").checked = false;
+			document.getElementById("2stars").checked = false;
+			document.getElementById("3stars").checked = false;
+			document.getElementById("4stars").checked = false;
+			document.getElementById("5stars").checked = false;
+	}
+	
+	var shelvesIn = JSON.parse(filmInfo.shelvesIn);
+	var shelvesOut = JSON.parse(filmInfo.shelvesOut);
 	
 	//display the names of the shelves that the film is present in
 	var shelfList = "";
-	if(shelvesInArray.length > 0) {
-		if(shelvesInArray.length > 1) shelfList = "On shelves: "
+	if(shelvesIn.length > 0) {
+		if(shelvesIn.length > 1) shelfList = "On shelves: "
 		else shelfList = "On shelf: "
 	}
 	
-	for(var i = 0; i < shelvesInArray.length; i++) {
-		var shelf = shelvesInArray[i].split(":");
+	for(var i = 0; i < shelvesIn.length; i++) {
+		var shelf = shelvesIn[i].split(":");
 		shelfList = shelfList + shelf[1];
-		if(shelvesInArray.length - i != 1) shelfList = shelfList + ", ";
+		if(shelvesIn.length - i != 1) shelfList = shelfList + ", ";
 	}
 	document.getElementById("moreInfoShelves").innerHTML = shelfList;
 	
 	//display form for adding film to shelves it is not in already
-	if(!!document.getElementById("moreInfoAddForm")) {
+	if(document.getElementById("moreInfoAddForm")) {
 		var form = "<form id='filmShelfAdd' autocomplete='off' action='scripts/shelf_edit.php' method='post'>"
 				   + "<label for='shelf'>Add to shelf: </label>"
-				   + "<input type='hidden' value='"+id+"' name='addFilm' id='addFilm'>"
+				   + "<input type='hidden' value='"+filmInfo.id+"' name='addFilm' id='addFilm'>"
 				   + "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
 				   + "<option>No shelf selected</option>";
 		
-		for(var i = 0; i < shelvesNotInArray.length; i++) {
-			var shelf = shelvesNotInArray[i].split(":");
+		for(var i = 0; i < shelvesOut.length; i++) {
+			var shelf = shelvesOut[i].split(":");
 			form = form + "<option value='"+shelf[0]+"'>"+shelf[1]+"</option>";
 		}
 		form = form + "</select></form>";
 		document.getElementById("moreInfoAddForm").innerHTML = form;
 	}
 	
-	
 	//display form for removing film from the shelves it is currently in
-	if(!!document.getElementById("moreInfoDeleteForm")) {
+	if(document.getElementById("moreInfoDeleteForm")) {
 		var form = "<form id='filmShelfDelete' autocomplete='off' action='scripts/shelf_edit.php' method='post'>"
 				   + "<label for='shelf'>Remove from shelf: </label>"
-				   + "<input type='hidden' value='"+id+"' name='deleteFilm' id='deleteFilm'>"
+				   + "<input type='hidden' value='"+filmInfo.id+"' name='deleteFilm' id='deleteFilm'>"
 				   + "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
 				   + "<option>No shelf selected</option>";
 		
-		for(var i = 0; i < shelvesInArray.length; i++) {
-			var shelf = shelvesInArray[i].split(":");
+		for(var i = 0; i < shelvesIn.length; i++) {
+			var shelf = shelvesIn[i].split(":");
 			form = form + "<option value='"+shelf[0]+"'>"+shelf[1]+"</option>";
 		}
 		form = form + "</select></form>";
 		document.getElementById("moreInfoDeleteForm").innerHTML = form;
 	}
-	
 }
 
 function closeFilmInfo() {

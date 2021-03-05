@@ -42,9 +42,7 @@
 		<div class="profileBio">
 			<?php
 			//look for bio -- if not found, fill with default text
-			if($bio == null) { //user has not defined a bio
-				echo("<p>User has not written a bio.");
-			} else {
+			if($bio != null) { //user has not defined a bio
 				echo("<p>".$bio."<p>");
 			}
 			?>

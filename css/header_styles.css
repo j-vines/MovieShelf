@@ -55,6 +55,10 @@ button:focus {
 	width: 60%; 
 }
 
+.modalHeader {
+	background-image: linear-gradient(slategrey, lightsteelblue);
+}
+
 .signupForm {
 	margin: auto;
 }
@@ -274,4 +278,35 @@ button:focus {
 .cancelButton {
 	display: inline-block;
 	margin-top:15px;
+}
+
+/* Star rating system */
+.starRating {
+	display: inline-block;
+}
+
+.starRating * {
+	float: right;
+}
+
+.starRating input {
+	display: none;
+}
+
+.starRating input[disabled] ~ label:hover {
+	cursor: default;
+}
+
+.starRating label {
+	font-size: 30px;
+}
+
+.starRating input:checked ~ label{
+	-webkit-text-fill-color: greenyellow;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+}
+
+.starRating label:hover {
+	cursor: pointer;
 }

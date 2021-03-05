@@ -23,14 +23,32 @@
 	</div>
 	<div id="addFilm" class="modalBox"> <!-- modal box that displays film information -->
 		<div id="addFilmContent" class="modalBoxContent">
+			<div class="modalHeader">
 			<button id='close' onClick='closeAddFilm()'>Close</button><br>
 			<h2 id="addFilmContentTitle"></h2>
+			</div>
 			<form id='collectionAdd' autocomplete='off' action='add_film.php' method='post'>
 			<input type='hidden' id='filmId' name='filmId' value=''> <!--pass api film id to database-->
 			<input type='hidden' id='posterPath' name='posterPath' value=''><!-- pass poster path to database-->
 			<input type='hidden' id='title' name='title' value=''> <!--pass film title to database-->
 			<input type='hidden' id='releaseDate' name='releaseDate' value=''>
 			<input type='hidden' id='userId' name='userId' value=''> <!--pass userid to add script-->
+			
+			<label for='rating'>Rate this release: </label>
+			<div class='starRating'>
+			<input type='radio' name='rating' id='5stars' value='5'>
+			<label for='5stars'>&#9733;</label>
+			<input type='radio' name='rating' id='4stars' value='4'>
+			<label for='4stars'>&#9733;</label>
+			<input type='radio' name='rating' id='3stars' value='3'>
+			<label for='3stars'>&#9733;</label>
+			<input type='radio' name='rating' id='2stars' value='2'>
+			<label for='2stars'>&#9733;</label>
+			<input type='radio' name='rating' id='1star' value='1'>
+			<label for='1star'>&#9733;</label>
+			</div>
+			
+			<br><br>
 			<label for='format'>Format: </label>
 			<select id='format' name='format'>
    			<option value='4'>DVD</option> <!-- 4 - id for dvd in db -->
