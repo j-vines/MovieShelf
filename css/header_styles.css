@@ -231,6 +231,34 @@ button:focus {
 	padding: 5px;
 }
 
+#collectionHeadingTitle {
+	padding: 20px;
+}
+
+#compareLink {
+	font-size: 1.5em;
+	font-weight: bolder;
+	color: black;
+}
+
+#compareLink:hover {
+	-webkit-text-fill-color: greenyellow;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+	cursor:pointer;
+}
+
+/*#compareLink:hover + #compareToolTip{
+	display:block;
+}*/
+
+#compareToolTip {
+	display:none;
+	margin:auto;
+	width: 30%;
+	padding:10px;
+}
+
 #moreInfoTitle {
 	font-weight:bolder;
 }
@@ -309,4 +337,50 @@ button:focus {
 
 .starRating label:hover {
 	cursor: pointer;
+}
+
+/* Collection comparison page */
+.statsDisplay {
+	width:50%;
+	margin-bottom: 20px;
+	display: inline-block;
+	
+}
+
+.statsSection {
+	background-image: linear-gradient(slategrey, lightsteelblue);
+	padding: 20px;
+}
+
+.recommendButton {
+	width: 100%;
+	margin: auto;
+	margin-bottom: 5%;
+	bottom: 0;
+	position: absolute;
+}
+
+#recommendForm {
+	display: none;
+}
+
+.shareLow {
+	font-weight: bolder;
+	-webkit-text-fill-color: red;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+}
+
+.shareMed {
+	font-weight: bolder;
+	-webkit-text-fill-color: orange;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+}
+
+.shareHigh {
+	font-weight: bolder;
+	-webkit-text-fill-color: greenyellow;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
 }

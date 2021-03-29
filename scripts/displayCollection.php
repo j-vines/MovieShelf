@@ -96,7 +96,15 @@
 		}
 		
 		if($count > 0) {
-			echo("<div class='collectionHeading'><h2>Collection (".$count." titles)</h2><br>");
+			if($visiting) {
+				echo("<div class='collectionHeading'><div id='collectionHeadingTitle'>
+					<a id='compareLink' href='collection_compare.php?compare_userid=".$collectionUser."&compare_username=".$collectionUsername."'> Collection (".$count." titles)</a>");
+				echo("<p id='compareToolTip'> Compare your collection to ".$collectionUsername."'s to see how your taste in
+					film coorelates.</p></div>");
+			} else {
+				echo("<div class='collectionHeading'><h2>Collection (".$count." titles)</h2>");
+			}
+			
 		} else {
 			if($visiting) echo("<div class='collectionHeading'><h2>".$collectionUsername." has not started a collection</h2><br>");
 			else echo("<div class='collectionHeading'><h2>You have not started a collection</h2><br>");

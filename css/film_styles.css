@@ -28,17 +28,20 @@
 
 .overviewButton {
 	width: 100%;
+	background-color: lightsteelblue;
+	color: black;
 }
 
 .overviewButton:hover {
-	background-color: darkSlateBlue;
+	background-color: slategrey;
 }
 
 .filmBox {
-	background-color: black;
+	/*background-color: black;*/
+	background-image: linear-gradient(slategrey, lightsteelblue);
 	margin: auto;
 	width: 85%;
-	color: white;
+	color: black;
 	padding: 10px;
 	text-align: left;
 }
@@ -58,6 +61,12 @@
 
 .addButton {
 	width: 100%;
+	background-color: lightsteelblue;
+	color: black;
+}
+
+.addButton:hover {
+	background-color: slategrey;
 }
 
 .addTitle {

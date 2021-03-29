@@ -29,7 +29,16 @@ function filmSearch() {
 		.then(function() {
 			//display number of results posted
 			var numDisplay = document.createElement('p');
-			numDisplay.innerHTML = numResults + " films found";
+			if (numResults == 20) {
+				numDisplay.innerHTML = "Showing first 20 results";
+			} else {
+				if (numResults != 1) {
+					numDisplay.innerHTML = numResults + " films found";
+				} else {
+					numDisplay.innerHTML = "1 film found";
+				}
+				
+			}
 			document.getElementById("searchResults").appendChild(numDisplay);
 		});
 }
