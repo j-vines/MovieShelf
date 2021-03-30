@@ -7,8 +7,13 @@
 		$collectionUsername;
 		$visiting; //specifies whether user is visting another profile or not
 		//check if user is viewing another person's collection, if so, display that user's collection
-		if(isset($_GET['userid'])) {
-			$collectionUser = $_GET['userid'];
+		if(isset($_GET['userid']) || isset($_POST['userid'])) {
+			if(isset($_GET['userid'])) {
+				$collectionUser = $_GET['userid'];
+			} else {
+				$collectionUser = $_POST['userid'];
+			}
+			
 			$visiting = true;
 			
 			$name_select = "SELECT display_name FROM user WHERE iduser = ".$collectionUser.";";

@@ -6,15 +6,16 @@
 <file name="db_close.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556801340494282" remote="132563464320000000" Dst="2" />
 <file name="loginFunctions.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132574794938927559" remote="132574759540000000" Dst="2" />
 <file name="get_display_name.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132558287946098010" remote="132563464320000000" Dst="2" />
-<file name="get_user_info.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132583606810000000" remote="132583570870000000" Dst="2" />
+<file name="get_user_info.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132615352369196962" remote="132615352430000000" Dst="2" />
 <file name="loginMessage.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132556681670000000" remote="132563464310000000" Dst="2" />
 <file name="signout.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132500389360000000" remote="132563464310000000" Dst="2" />
 <file name="filmFunctions.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132596900315321702" remote="132596864390000000" Dst="2" />
 <file name="cookieFunctions.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132574457689426304" remote="132574422840000000" Dst="2" />
-<file name="displayCollection.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132594410516357943" remote="132594374760000000" Dst="2" />
+<file name="displayCollection.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132615361501079051" remote="132615361560000000" Dst="2" />
 <file name="remove_film.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132582252213275948" remote="132582216380000000" Dst="2" />
 <file name="collectionFunctions.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132614641533042561" remote="132614641610000000" Dst="2" />
 <file name="shelf_edit.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132590481372329809" remote="132590445510000000" Dst="2" />
 <file name="film_edit.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132593978004037078" remote="132593942260000000" Dst="2" />
 <file name="sendRecommendation.php" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132614608290000000" remote="132614613750000000" Dst="2" />
+<file name="activityFunctions.js" server="arden.cs.unca.edu/public_html/MovieShelf/" local="132615216542743117" remote="132615216630000000" Dst="2" />
 </dwsync>

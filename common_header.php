@@ -117,8 +117,27 @@
 	<div class = "links">
 		<?php
 			if(isset($_COOKIE["user"])) { //only give profile and activity options if user is logged in
-				echo("<a href = 'profile.php'> PROFILE </a>
-					<a href = '#activity'> ACTIVITY </a>");
+				include("scripts/db_connect.php");
+				
+				//count posts + recommendations for number displayed next to activity
+				$activity_count = 0;
+				
+				$rec_count = "SELECT COUNT(*) FROM recommendation WHERE user_to = ".$_COOKIE["user"]." AND opened = 0;";
+				if($count_result = mysqli_query($con, $rec_count)) {
+					$activity_count += mysqli_fetch_array($count_result)[0];
+				} else {
+					echo("Count could not be performed");
+					echo mysqli_error($con);
+				}
+				
+				//display profile specific links
+				echo("<a href = 'profile.php'> PROFILE </a>");
+				if($activity_count == 0) {
+					echo("<a href = 'activity.php'> ACTIVITY </a>");
+				} else {
+					echo("<a href = 'activity.php'> ACTIVITY <span class='notification'>(".$activity_count.")</span></a>");
+				}
+				include("scripts/db_close.php");
 			}
 		?>
 			<a href = "people.php"> PEOPLE </a>

@@ -14,8 +14,33 @@
 <body>
 	<div class="profileContent">
 		<?php
+		
 			//Title of user's profile
 			echo("<h2 class='profileTitle'>".$display_name."'s Profile</h2>");
+			
+			//follow button
+			if($following == 0) { //you are not following this user
+				echo("<form action='user_profile.php' method='post'>
+					<input type='hidden' name='userid' value='".$userid."'>
+					<input type='hidden' name='follow' value='1'>
+					<input type='submit' value='Follow'>
+					</form>");
+			} else { //you are following this user
+				echo("<form action='user_profile.php' method='post'>
+					<input type='hidden' name='userid' value='".$userid."'>
+					<input type='hidden' name='unfollow' value='1'>
+					<input type='submit' value='Unfollow'>
+					</form>");
+			}
+			
+			//following count
+			if($follow_num == 1) {
+				echo("<br>1 follower<br><br>");
+			} else {
+				echo("<br>" . $follow_num . " followers<br><br>");
+			}
+			
+		
 			echo("Member since: ".date("F d, Y", strtotime($date_joined))."<br>");
 			
 			//display when user was last active
@@ -32,10 +57,6 @@
 		?>
 		<div class="personalInfo">
 		<div class="profilePic">
-			<?php
-			//look for profile picture -- if not found, put default pic
-			
-			?>
 			<img width=80% src="images/default.png" alt="No profile picture found."> <!-- find profile picture in image_uploads -->
 		</div>
 		

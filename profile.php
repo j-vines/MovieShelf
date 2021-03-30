@@ -1,6 +1,8 @@
 <?php 
 	include "common_header.php";
 	include "scripts/get_display_name.php";
+	include "scripts/db_connect.php";
+	
 ?>
 <!doctype html>
 <html>
@@ -14,6 +16,36 @@
 		<?php
 			//Title of user's profile
 			echo("<h2 class='profileTitle'>".$display_name."'s Profile</h2>");
+		
+			//Get follower count
+			$follow_count = "SELECT COUNT(*) FROM following WHERE followed_user = ".$_COOKIE["user"].";";
+			if($count_result = mysqli_query($con, $follow_count)) {
+				$followers = mysqli_fetch_array($count_result)[0];
+			} else {
+				echo("Count could not be performed");
+				echo mysqli_error($con);
+			}
+		
+			//Get following count
+			$follow_count = "SELECT COUNT(*) FROM following WHERE following_user = ".$_COOKIE["user"].";";
+			if($count_result = mysqli_query($con, $follow_count)) {
+				$following = mysqli_fetch_array($count_result)[0];
+			} else {
+				echo("Count could not be performed");
+				echo mysqli_error($con);
+			}
+		
+			if($followers == 1) {
+				echo("1 follower, ");
+			} else {
+				echo($followers . " followers, ");
+			}
+			
+			echo($following . " following<br><br>");
+			
+
+		
+		
 		?>
 		<!-- Links to form for editing user profile -->
 		<button onClick="location.href='edit_profile.php'">Edit Profile</button>
@@ -29,7 +61,6 @@
 		<div class="profileBio">
 			<?php
 			//look for bio -- if not found, fill with default text
-			include "scripts/db_connect.php";
 			
 			$bio_search = "SELECT bio FROM user WHERE iduser ='".$_COOKIE["user"]."';";
 			if($bio_search_result = mysqli_query($con, $bio_search)) {
@@ -82,7 +113,7 @@
 				<div id="deleteShelf" class='deleteShelf'>
 				<h2>Deleting a shelf</h2>
 					<?php
-					include("scripts/db_connect.php");
+					//include("scripts/db_connect.php");
 					//show drop down of existing lists
 					$shelf_select = "SELECT idshelf, `name` FROM shelf WHERE shelf_user = ".$_COOKIE["user"].";";
 					if($shelf_result = mysqli_query($con, $shelf_select)) {

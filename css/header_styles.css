@@ -33,6 +33,12 @@ button:focus {
 	outline: none;
 }
 
+.notification {
+	-webkit-text-fill-color: greenyellow;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+}
+
 /* Modal box that contains sign up form */
 .modalBox {
 	display: none; /* Not shown by default */
@@ -379,6 +385,59 @@ button:focus {
 }
 
 .shareHigh {
+	font-weight: bolder;
+	-webkit-text-fill-color: greenyellow;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+}
+
+/* Activity Page Styles */
+#recommendations {
+	display: none;
+}
+
+#posts {
+	display: block;
+}
+
+.activityToggle {
+	width: 45%;
+	font-weight: bold;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.recommendation {
+	display: none;
+}
+
+.recommendationShow {
+	color: black;
+	margin-top: 20px;
+	width: 100%;
+	padding: 15px;
+	background-image: linear-gradient(slategrey, lightsteelblue);
+}
+
+.recommendationShow:hover {
+	background-image: linear-gradient(slategrey, slategrey);
+}
+
+#postButton {
+	background-color: darkslateblue;
+}
+
+#recButton {
+	background-color: black;
+}
+
+.profileLink {
+	color: black;
+	font-weight: bolder;
+}
+
+.profileLink:hover {
 	font-weight: bolder;
 	-webkit-text-fill-color: greenyellow;
   	-webkit-text-stroke-width: 1px;
