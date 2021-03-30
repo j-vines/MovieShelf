@@ -195,26 +195,43 @@ function showCompareFilmInfo(filmInfo) {
 	if(filmInfo.recommend) {
 		document.getElementById("recommendButton").innerHTML = "<button onClick='showRecommendForm()'>Recommend this film</button>";
 		
-		var recommendForm = "<form action='collection_compare.php' method='post'>"
-							+ "<input type='hidden' id='sendRecommendation' name='sendRecommendation'>"
-							+ "<input type='hidden' id='userFrom' name='userFrom' value='" + filmInfo.userId + "'>"
-							+ "<input type='hidden' id='userTo' name='userTo' value='" + filmInfo.otherUserId + "'>"
-							+ "<input type='hidden' id='userToName' name='userToName' value='" + filmInfo.otherUsername + "'>"
-							+ "<input type='hidden' id='filmTitle' name='filmTitle' value='" + filmInfo.title + "'>"
-							+ "<input type='hidden' id='filmYear' name='filmYear' value='" + filmInfo.releaseYear + "'>"
-							+ "<input type='hidden' id='filmPosterPath' name='filmPosterPath' value='" + filmInfo.posterPath + "'>"
-							+ "<label for='message'>Message: </lable>"
-							+ "<textarea maxlength='250' rows='5' cols='40' id='message' name='message'></textarea><br><br>"
-							+ "<input type='submit' value='Send'>"
-							+ "</form><br><br>"
+		var recommendForm = "<textarea maxlength='250' rows='5' cols='40' id='message' name='message'></textarea><br><br>"
+							+ "<button id='sendRecommendationButton'>Send</button>"
+							+ "<br><br>"
 							+ "<button type='button' onClick='closeRecommendForm()'>Cancel</button>";
 			
 		document.getElementById("recommendForm").innerHTML = recommendForm;
+		
+		document.getElementById("sendRecommendationButton").addEventListener("click", function(e) {
+			sendRecommendation(filmInfo);
+			
+		}, false);
 	} else {
 		document.getElementById("recommendButton").innerHTML = "";
 	}
 	
 	
+}
+
+function sendRecommendation(filmInfo) {
+	
+	var message = document.getElementById("message").value;
+	
+	$.ajax({
+		url: "scripts/send_recommendation.php",
+		type: "POST",
+		data: {'userTo': filmInfo.otherUserId,
+				'filmPosterPath': filmInfo.posterPath,
+				'filmYear': filmInfo.releaseYear,
+				'filmTitle': filmInfo.title,
+				'userFrom': filmInfo.userId,
+			  	'message': message},
+		success: function() {
+					closeRecommendForm();
+					alert("Recommendation sent!");
+					
+				}
+		});
 }
 
 function closeFilmInfo() {

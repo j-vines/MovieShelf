@@ -432,6 +432,15 @@ button:focus {
 	background-color: black;
 }
 
+.openedLabel {
+	font-size: 15px;
+	font-weight: bolder;
+	-webkit-text-fill-color: greenyellow;
+  	-webkit-text-stroke-width: 1px;
+  	-webkit-text-stroke-color: black;
+	margin: 5px;
+}
+
 .profileLink {
 	color: black;
 	font-weight: bolder;

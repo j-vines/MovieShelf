@@ -370,15 +370,7 @@
 
 	function send_recommendation($con) {
 		
-		$message = mysqli_real_escape_string($con, $_POST["message"]);
 		
-		$insert = "INSERT INTO recommendation(user_to, user_from, film_title, film_poster_path, film_release_year, sent_time, message)
-					VALUES (".$_POST["userTo"].", ".$_POST["userFrom"].", '".$_POST["filmTitle"]."', '".$_POST["filmPosterPath"]."', '".$_POST["filmYear"]."', now(), '".$message."');";
-			if(!($result = mysqli_query($con, $insert))) {
-				echo("Recommendation could not be inserted");
-				echo mysqli_error($con);
-				echo ($insert);
-			}
 	}
 
 ?>
