@@ -107,10 +107,7 @@ function showFilmInfo(filmInfo) {
 	document.getElementById("moreInfoFormat").innerHTML = filmInfo.format;
 	document.getElementById("moreInfoPoster").src = filmInfo.posterPath;
 	if(document.getElementById("removeFilm")) {
-		document.getElementById("removeFilm").addEventListener("click", function(e) {
-			removeFilm(filmInfo.id);
-			
-		}, false);
+		document.getElementById("removeFilm").onclick = function(){ removeFilm(filmInfo.id); };
 	}
 	/*if(document.getElementById("ratingId")) {
 		document.getElementById("ratingId").value = filmInfo.id;
