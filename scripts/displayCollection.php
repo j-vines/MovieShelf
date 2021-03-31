@@ -260,6 +260,7 @@
 
 	/* Displays all films in specified shelf */
 	function displayShelf($shelf, $visiting, $collectionUser, $con) {
+		echo("<script> setCurrShelf(".$shelf."); </script>");
 		//display name and description of shelf
 		$shelf_info_select = "SELECT `name`, `desc` FROM shelf WHERE idshelf = ".$shelf.";";
 		if($shelf_info_result = mysqli_query($con, $shelf_info_select)) {
@@ -295,7 +296,7 @@
 
 	/* Displays all films in a user's collection */
 	function displayAll($collectionUser, $visiting, $con) {
-		
+		echo("<script> setCurrShelf(0); </script>");
 		//get/display posters
 		$poster_select = "SELECT idfilm, poster_path, title, release_year, film_format, rating FROM film WHERE film_user = ".$collectionUser.";";
 		if($poster_result = mysqli_query($con, $poster_select)) {

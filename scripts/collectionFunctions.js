@@ -1,5 +1,6 @@
 
 var filmInfoList = [];
+var currShelfId = 0;
 
 function collectionInit() {
 	var posters= document.getElementsByClassName("collectionPosterContainer");
@@ -16,6 +17,10 @@ function collectionInit() {
 			
 		}, false);
 	}
+}
+
+function setCurrShelf(shelfId) {
+	currShelfId = shelfId;
 }
 
 function collectionCompareInit() {
@@ -119,7 +124,6 @@ function showFilmInfo(filmInfo) {
 	document.getElementById("5stars").onclick = function(){changeRating(filmInfo.id, 5)};
 	
 	//display stars based on rating in db
-	console.log(filmInfo.rating);
 	switch(filmInfo.rating) {
 		case '1':
 			document.getElementById("1star").checked = true;
@@ -166,10 +170,10 @@ function showFilmInfo(filmInfo) {
 	
 	//display form for adding film to shelves it is not in already
 	if(document.getElementById("moreInfoAddForm")) {
-		var form = "<form id='filmShelfAdd' autocomplete='off' action='scripts/shelf_edit.php' method='post'>"
+		var form = "<form id='filmShelfAdd' autocomplete='off'>"
 				   + "<label for='shelf'>Add to shelf: </label>"
 				   + "<input type='hidden' value='"+filmInfo.id+"' name='addFilm' id='addFilm'>"
-				   + "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
+				   + "<select id='addToShelf' name='shelf'>"
 				   + "<option>No shelf selected</option>";
 		
 		for(var i = 0; i < shelvesOut.length; i++) {
@@ -178,14 +182,17 @@ function showFilmInfo(filmInfo) {
 		}
 		form = form + "</select></form>";
 		document.getElementById("moreInfoAddForm").innerHTML = form;
+		
+		var addToShelf = document.getElementById("addToShelf");
+		addToShelf.onchange = function(){shelfAdd(addToShelf.value, filmInfo.id)};
 	}
 	
 	//display form for removing film from the shelves it is currently in
 	if(document.getElementById("moreInfoDeleteForm")) {
-		var form = "<form id='filmShelfDelete' autocomplete='off' action='scripts/shelf_edit.php' method='post'>"
+		var form = "<form id='filmShelfDelete' autocomplete='off'>"
 				   + "<label for='shelf'>Remove from shelf: </label>"
 				   + "<input type='hidden' value='"+filmInfo.id+"' name='deleteFilm' id='deleteFilm'>"
-				   + "<select id='shelf' name='shelf' onchange='this.form.submit()'>"
+				   + "<select id='deleteFromShelf' name='shelf'>"
 				   + "<option>No shelf selected</option>";
 		
 		for(var i = 0; i < shelvesIn.length; i++) {
@@ -194,6 +201,9 @@ function showFilmInfo(filmInfo) {
 		}
 		form = form + "</select></form>";
 		document.getElementById("moreInfoDeleteForm").innerHTML = form;
+		
+		var deleteFromShelf = document.getElementById("deleteFromShelf");
+		deleteFromShelf.onchange = function(){shelfRemove(deleteFromShelf.value, filmInfo.id)};
 	}
 }
 
@@ -269,11 +279,37 @@ function changeRating(id, rating) {
 			//change rating in filminfolist
 			for(var i = 0; i < filmInfoList.length; i++) {
 				if(filmInfoList[i].id == id) {
-					console.log(filmInfoList[i].title);
-					console.log(filmInfoList[i].rating);
 					filmInfoList[i].rating = rating.toString();
-					console.log(filmInfoList[i].rating);
 				}
+			}
+		}
+		});
+}
+
+function shelfAdd(shelfId, filmId) {
+	$.ajax({
+		url: "scripts/add_to_shelf.php",
+		type: "POST",
+		data: {'shelfId': shelfId,
+			  	'filmId': filmId},
+		success: function() {
+			alert("Film added to shelf!");
+		}
+		});
+}
+
+function shelfRemove(shelfId, filmId) {
+	$.ajax({
+		url: "scripts/delete_from_shelf.php",
+		type: "POST",
+		data: {'shelfId': shelfId,
+			  	'filmId': filmId},
+		success: function() {
+			alert("Film removed from shelf!");
+
+			if(currShelfId.toString() == shelfId) {
+				var element = document.getElementById(filmId);
+				element.parentElement.removeChild(element);
 			}
 		}
 		});
