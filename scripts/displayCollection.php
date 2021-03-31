@@ -59,18 +59,18 @@
 			. "<label for='1star'>&#9733;</label>"
 			. "</div><br>");
 		} else {
-			echo("<form id='moreInfoRating' action='scripts/film_edit.php' method='post'>"
+			echo("<form id='moreInfoRating'>"
 			. "<input type='hidden' id='ratingId' name='ratingId' value=''>"
 			. "<div class='starRating'>"
-			. "<input type='radio' name='rating' id='5stars' value='5' onclick='this.form.submit()'>"
+			. "<input type='radio' name='rating' id='5stars' value='5'>"
 			. "<label for='5stars'>&#9733;</label>"
-			. "<input type='radio' name='rating' id='4stars' value='4' onclick='this.form.submit()'>"
+			. "<input type='radio' name='rating' id='4stars' value='4'>"
 			. "<label for='4stars'>&#9733;</label>"
-			. "<input type='radio' name='rating' id='3stars' value='3' onclick='this.form.submit()'>"
+			. "<input type='radio' name='rating' id='3stars' value='3'>"
 			. "<label for='3stars'>&#9733;</label>"
-			. "<input type='radio' name='rating' id='2stars' value='2' onclick='this.form.submit()'>"
+			. "<input type='radio' name='rating' id='2stars' value='2'>"
 			. "<label for='2stars'>&#9733;</label>"
-			. "<input type='radio' name='rating' id='1star' value='1' onclick='this.form.submit()'>"
+			. "<input type='radio' name='rating' id='1star' value='1'>"
 			. "<label for='1star'>&#9733;</label></form>"
 			. "</div>");
 		}
@@ -83,9 +83,7 @@
 			echo("<div id='moreInfoAddForm'></div>");
 			echo("<div id='moreInfoDeleteForm'></div>");
 			//place remove button if viewing personal collection
-			echo("<div><form action='scripts/remove_film.php' method='post'>"
-				. "<input type='hidden' id='removeFilm' name='filmId' value=''>"
-				. "<input type='submit' value='Remove'></form></div>");
+			echo("<div><button id='removeFilm'>Remove</button></div>");
 		}
 		echo("</div></div>");
 		

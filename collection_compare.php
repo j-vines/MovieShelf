@@ -14,25 +14,14 @@
 			</div>
 			</div></div>");
 
-
-
-	if(isset($_POST["sendRecommendation"])) {
-		send_recommendation($con);
-	}
-
 	compare_collections($con);
 
 	function compare_collections($con) {
 		
 		
 		$user_id = $_COOKIE["user"];
-		if(isset($_POST["sendRecommendation"])) {
-			$other_user_id = $_POST["userTo"];
-			$other_user_name = $_POST["userToName"];
-		} else {
-			$other_user_id =  $_GET["compare_userid"];
-			$other_user_name = $_GET["compare_username"];
-		}
+		$other_user_id =  $_GET["compare_userid"];
+		$other_user_name = $_GET["compare_username"];
 		
 		$stats = get_stats($con, $user_id, $other_user_id);
 		

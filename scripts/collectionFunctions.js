@@ -102,12 +102,24 @@ function showFilmInfo(filmInfo) {
 	document.getElementById("moreInfoFormat").innerHTML = filmInfo.format;
 	document.getElementById("moreInfoPoster").src = filmInfo.posterPath;
 	if(document.getElementById("removeFilm")) {
-		document.getElementById("removeFilm").value = filmInfo.id;
+		document.getElementById("removeFilm").addEventListener("click", function(e) {
+			removeFilm(filmInfo.id);
+			
+		}, false);
 	}
-	if(document.getElementById("ratingId")) {
+	/*if(document.getElementById("ratingId")) {
 		document.getElementById("ratingId").value = filmInfo.id;
-	}
+	}*/
 	
+	//set stars to change rating
+	document.getElementById("1star").onclick = function(){changeRating(filmInfo.id, 1)};
+	document.getElementById("2stars").onclick = function(){changeRating(filmInfo.id, 2)};
+	document.getElementById("3stars").onclick = function(){changeRating(filmInfo.id, 3)};
+	document.getElementById("4stars").onclick = function(){changeRating(filmInfo.id, 4)};
+	document.getElementById("5stars").onclick = function(){changeRating(filmInfo.id, 5)};
+	
+	//display stars based on rating in db
+	console.log(filmInfo.rating);
 	switch(filmInfo.rating) {
 		case '1':
 			document.getElementById("1star").checked = true;
@@ -231,6 +243,39 @@ function sendRecommendation(filmInfo) {
 					alert("Recommendation sent!");
 					
 				}
+		});
+}
+
+function removeFilm(id) {
+	$.ajax({
+		url: "scripts/remove_film.php",
+		type: "POST",
+		data: {'filmId': id},
+		success: function() {
+					closeFilmInfo();
+					var element = document.getElementById(id);
+					element.parentElement.removeChild(element);
+				}
+		});
+}
+
+function changeRating(id, rating) {
+	$.ajax({
+		url: "scripts/change_rating.php",
+		type: "POST",
+		data: {'ratingId': id,
+			  	'rating': rating},
+		success: function() {
+			//change rating in filminfolist
+			for(var i = 0; i < filmInfoList.length; i++) {
+				if(filmInfoList[i].id == id) {
+					console.log(filmInfoList[i].title);
+					console.log(filmInfoList[i].rating);
+					filmInfoList[i].rating = rating.toString();
+					console.log(filmInfoList[i].rating);
+				}
+			}
+		}
 		});
 }
 
