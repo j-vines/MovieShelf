@@ -103,3 +103,6 @@
 	
 </body>
 </html>
+<?php
+	include("common_footer.php");
+?>

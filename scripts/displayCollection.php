@@ -77,7 +77,16 @@
 		
 		
 		echo("<img id='moreInfoPoster'></img>
-					<h3><span id='moreInfoShelves'></span></h3>");
+				<div id='moreInfoReviewText'></div>");
+		if(!$visiting) {
+			echo("<button id='moreInfoReviewButton'></button>");
+			echo("<div id='moreInfoReviewForm'>
+					<textarea maxlength='250' rows='5' cols='40' id='reviewTextArea' name='reviewTextArea'></textarea><br><br>
+					<button id='postReviewButton'>Post Review</button><br><br>
+					<button id='cancelReviewButton'>Cancel</button></div>");
+		}
+				
+		echo("<h3><span id='moreInfoShelves'></span></h3>");
 		
 		if(!$visiting) {
 			echo("<div id='moreInfoAddForm'></div>");
@@ -185,6 +194,15 @@
 				echo("Format could not be retrieved");
 				echo mysqli_error($con);
 			}
+			
+			//get review text
+			$review_select = "SELECT review_text FROM review WHERE review_film = ".$poster["idfilm"].";";
+			if($review_result = mysqli_query($con, $review_select)) {
+				$review = mysqli_fetch_array($review_result)[0];
+			} else {
+				echo("review could not be retrieved");
+				echo mysqli_error($con);
+			}
 
 			if($poster_count % 6 == 0) echo("</tr><tr>"); //every six films, create new row
 
@@ -199,6 +217,7 @@
 			$moreInfo->title = $poster["title"];
 			$moreInfo->rating = $poster["rating"];
 			$moreInfo->format = $format;
+			$moreInfo->review = $review;
 			$moreInfo->releaseYear = $poster["release_year"];
 			$moreInfo->posterPath = $poster["poster_path"];
 			$moreInfo->shelvesIn = getShelves($poster["idfilm"], $con);

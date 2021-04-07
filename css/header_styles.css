@@ -254,9 +254,9 @@ button:focus {
 	cursor:pointer;
 }
 
-/*#compareLink:hover + #compareToolTip{
+#compareLink:hover + #compareToolTip{
 	display:block;
-}*/
+}
 
 #compareToolTip {
 	display:none;
@@ -265,8 +265,21 @@ button:focus {
 	padding:10px;
 }
 
+#moreInfoReviewForm {
+	display:none;
+}
+
+#moreInfoReviewText {
+	padding: 15px;
+	background-color: #dbe4f0;
+}
+
 #moreInfoTitle {
 	font-weight:bolder;
+}
+
+#moreInfoReviewButton {
+	margin: auto;
 }
 
 /* Shelf editing modal box */

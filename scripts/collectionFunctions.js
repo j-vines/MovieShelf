@@ -100,18 +100,32 @@ function cancelOp() {
 	shelvesIn - array of shelves film is stored in
 	shelvesOut - array of shelves film is NOT stored in */
 function showFilmInfo(filmInfo) {
-	
+	//console.log(filmInfo);
 	document.getElementById("filmInfo").style.display="block";
 	document.getElementById("moreInfoTitle").innerHTML = filmInfo.title;
 	document.getElementById("moreInfoYear").innerHTML = filmInfo.releaseYear;
 	document.getElementById("moreInfoFormat").innerHTML = filmInfo.format;
 	document.getElementById("moreInfoPoster").src = filmInfo.posterPath;
+	document.getElementById("moreInfoReviewText").innerHTML = filmInfo.review;
+	if(document.getElementById("moreInfoReviewButton")) {
+		if(filmInfo.review == null) {
+			document.getElementById("moreInfoReviewButton").innerHTML = "Write a Review";
+		} else {
+			document.getElementById("moreInfoReviewButton").innerHTML = "Edit Your Review";
+		}
+		document.getElementById("moreInfoReviewButton").onclick = function() { showReviewForm(filmInfo.review); };
+		document.getElementById("cancelReviewButton").onclick = function() { closeReviewForm(filmInfo.review); };
+		document.getElementById("postReviewButton").onclick = function() { postReview(filmInfo.id); };
+	}
 	if(document.getElementById("removeFilm")) {
 		document.getElementById("removeFilm").onclick = function(){ removeFilm(filmInfo.id); };
 	}
-	/*if(document.getElementById("ratingId")) {
-		document.getElementById("ratingId").value = filmInfo.id;
-	}*/
+	
+	if(filmInfo.review == null) {
+		document.getElementById("moreInfoReviewText").style.display = "none";
+	} else {
+		document.getElementById("moreInfoReviewText").style.display = "block";
+	}
 	
 	//set stars to change rating
 	document.getElementById("1star").onclick = function(){changeRating(filmInfo.id, 1)};
@@ -147,6 +161,7 @@ function showFilmInfo(filmInfo) {
 			document.getElementById("4stars").checked = false;
 			document.getElementById("5stars").checked = false;
 	}
+	
 	
 	var shelvesIn = JSON.parse(filmInfo.shelvesIn);
 	var shelvesOut = JSON.parse(filmInfo.shelvesOut);
@@ -205,7 +220,6 @@ function showFilmInfo(filmInfo) {
 }
 
 function showCompareFilmInfo(filmInfo) {
-	console.log(filmInfo);
 	document.getElementById("filmInfo").style.display="block";
 	document.getElementById("collectionCompareTitle").innerHTML = filmInfo.title;
 	document.getElementById("collectionComparePoster").src = filmInfo.posterPath;
@@ -251,6 +265,46 @@ function sendRecommendation(filmInfo) {
 					
 				}
 		});
+}
+	
+function postReview(id) {
+	var reviewText = document.getElementById("reviewTextArea").value;
+	
+	$.ajax({
+		url: "scripts/post_review.php",
+		type: "POST",
+		data: {'id': id,
+			  	'review': reviewText},
+		success: function() {
+			alert("Review Posted!");
+
+			//change review in filminfolist
+			for(var i = 0; i < filmInfoList.length; i++) {
+				if(filmInfoList[i].id == id) {
+					filmInfoList[i].review = reviewText;
+				}
+			}
+			closeReviewForm(reviewText);
+			document.getElementById("moreInfoReviewText").innerHTML = reviewText;
+		}
+		});
+}
+
+function showReviewForm(review) {
+	document.getElementById("moreInfoReviewForm").style.display = "block";
+	document.getElementById("moreInfoReviewButton").style.display = "none";
+	document.getElementById("moreInfoReviewText").style.display = "none";
+	document.getElementById("reviewTextArea").value = review;
+}
+
+function closeReviewForm(review) {
+	if(review != null) {
+		document.getElementById("moreInfoReviewText").style.display = "block";
+	}
+	document.getElementById("moreInfoReviewForm").style.display = "none";
+	document.getElementById("reviewTextArea").value = "";
+	document.getElementById("moreInfoReviewButton").style.display = "block";
+	
 }
 
 function removeFilm(id) {
