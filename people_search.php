@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Query database for users */
 	include "scripts/db_connect.php";
 	$user_search = "SELECT display_name, iduser, username FROM user WHERE display_name LIKE '% ".$_GET["search"]."' OR display_name LIKE '".$_GET["search"]." %' OR display_name LIKE '".$_GET["search"]."%';";
 	if(!($user_search_result = mysqli_query($con, $user_search))) { //search was unsuccessful

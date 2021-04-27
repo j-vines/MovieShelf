@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Delete a film from the database */
 	include("db_connect.php");
 	//delete film from filmshelf table
 	$film_remove = "DELETE FROM filmshelf WHERE filmshelf_film = ".$_POST["filmId"].";";

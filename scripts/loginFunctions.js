@@ -1,8 +1,9 @@
-/**
-	loginMessage.js
-
-
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
 */
+
+/* Functions used in displaying login form in common header */
 var message;
 var form;
 
@@ -31,8 +32,9 @@ function hideForm() {
 	form.style.display = "none";
 }
 
+// Display or hide contents of password input field
 function togglePassword() {
-	var pass = document.getElementById("password");
+	var pass = document.getElementById("password_signup");
   	if (pass.type === "password") {
 		pass.type = "text";
   	} else {
@@ -40,11 +42,13 @@ function togglePassword() {
   	}
 }
 
+// Display sign-up modal box
 function openCreateAccount() {
 	var signupForm = document.getElementById("createAccount");
 	signupForm.style.display = "block";
 }
 
+// Hide sign-up modal box
 function closeCreateAccount() {
 	var signupForm = document.getElementById("createAccount");
 	signupForm.style.display = "none";

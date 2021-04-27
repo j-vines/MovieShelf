@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Activity page displays new posts from followed users and recommendations received from other users */
 	include("common_header.php");
 ?>
 <!doctype html>
@@ -95,11 +101,11 @@
 		
 		</div>
 		<div id='posts'>
-			Posts:
-		
+			<br>
+			Retrieving updates...
 		</div>
 	</div>
-	
+	<script> initGetPosts(); </script>
 	
 </body>
 </html>

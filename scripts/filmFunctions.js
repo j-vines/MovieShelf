@@ -1,3 +1,8 @@
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
 /* Functions for searching and displaying results from the TMDb API */
 var numResults = 0;
 var apiKey = "444952e78bcc4ff9123cbb5ec23e628f"; 
@@ -124,21 +129,6 @@ function display(film, resultWindow) {
 		message.innerHTML = "<h3>Sign-in to add this film to your collection</h3>";
 		filmBox.appendChild(message);
 	}
-	
-	
-	
-				
-	//show genres
-	/*var genreListText = "";
-	for(let index in film.genres) {
-		genreListText = genreListText + film.genres[index].name + ", ";
-	}
-	genreListText = genreListText.slice(0, -2);
-	var genreList = document.createElement('p');
-	genreList.innerHTML = genreListText;
-	console.log(genreListText);
-	filmBox.appendChild(genreList); //add poster div (contains poster and genre list)*/
-	
 
 	resultWindow.appendChild(filmBox);
 	resultWindow.appendChild(breakLine);

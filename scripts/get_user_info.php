@@ -1,4 +1,10 @@
 <?php
+	/*  MovieShelf
+		Jack Vines
+		2020 - 2021
+	*/
+
+	/* Get information about a user to be displayed on profile page */
 	include "db_connect.php";
 
 	if(isset($_POST["follow"]) || isset($_POST["unfollow"])) {

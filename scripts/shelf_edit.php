@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Functions used in modifying a user's shelves */
 	include("db_connect.php");
 
 	if(isset($_POST["create"])) {

@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Validate login information and set user cookie if information is properly validated */
 	include "scripts/db_connect.php";
 	
 	$user_exists = false;
@@ -31,6 +37,9 @@
 								//last login could not be set
 								echo("Last login could not be set.");
 								echo mysqli_error($con);
+							} else {
+								include "scripts/db_close.php";
+								header("Location: profile.php"); //redirect to profile
 							}
 						} else {
 							echo("User ID not found.");
@@ -39,6 +48,9 @@
 						
 					} else { //user exists but password is incorrect
 						setcookie("login_error", "Incorrect username or password.", time() + 86400, "/");
+						include "scripts/db_close.php";
+						header("Location: index.php");
+
 					}
 					
 				} else {
@@ -48,6 +60,9 @@
 					
 			} else { //provided username not found in database
 				setcookie("login_error", "Incorrect username or password.", time() + 86400, "/");
+				include "scripts/db_close.php";
+				header("Location: index.php");
+					
 			}
 			
 		} else {
@@ -57,8 +72,9 @@
 	
 	} else { //fields left blank
 		setcookie("login_error", "You left one or more fields blank.", time() + 86400, "/");
+		include "scripts/db_close.php";
+		header("Location: index.php");
 	}
-	include "scripts/db_close.php";
-	header("Location: profile.php"); //redirect to profile
+	
 
 ?>

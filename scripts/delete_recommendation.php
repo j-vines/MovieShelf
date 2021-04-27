@@ -1,4 +1,14 @@
 <?php
+	/*  MovieShelf
+		Jack Vines
+		2020 - 2021
+	*/
+
+	/* Delete a recommendation from the database
+		$_POST["idrecommendation"] - id of recommendation to be deleted
+	*/
+
+
 	include("db_connect.php");
 
 	$update = "DELETE FROM recommendation WHERE idrecommendation = ".$_POST["idrecommendation"].";";

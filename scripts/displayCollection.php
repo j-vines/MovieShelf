@@ -1,4 +1,10 @@
 <?php
+	/*  MovieShelf
+		Jack Vines
+		2020 - 2021
+	*/
+
+	/* Functions used in displaying your or another user's collection */
 
 	/* Displays films present in provided shelf. If no shelf provided, displays entire collection */
 	function displayCollection() {
@@ -128,9 +134,9 @@
 		$shelf_select = "SELECT idshelf, `name` FROM shelf WHERE shelf_user = ".$collectionUser.";";
 		if($shelf_result = mysqli_query($con, $shelf_select)) {
 			if(mysqli_num_rows($shelf_result) > 0){
-				if(isset($_GET['userid'])) {
+				if(isset($_GET['userid']) || isset($_POST['userid'])) {
 					echo("<form id='shelfSelect' autocomplete='off' action='user_profile.php' method='get'>" //if user is viewing other's collection, change form action
-						."<input name='userid' type='hidden' value='".$_GET['userid']."'>"); //and persist $_GET[userid]
+						."<input name='userid' type='hidden' value='".$collectionUser."'>"); //and persist $_GET[userid]
 				} else {
 					echo("<form id='shelfSelect' autocomplete='off' action='profile.php' method='get'>");
 				}

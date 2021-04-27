@@ -1,4 +1,9 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
 	//save the given profile information to the database
 	//make sure to process the post information to avoid sql injection
 	include "scripts/db_connect.php";

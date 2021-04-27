@@ -1,4 +1,12 @@
 <?php 
+
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Page that contains form for updating information visible on a user's profile */
+
 	include "common_header.php";
 ?>
 <!doctype html>

@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Header included on every page across site */
 	session_start();
 	$login_message_content = "";
 	//CHECK IF USER COOKIE IS SET. IF NOT, DISPLAY LOGIN BUTTON, IF SO, DISPLAY WELCOME MESSAGE AND SIGN IN BUTTON
@@ -56,7 +62,8 @@
 						</td>
 						<td align="left">
 							<input type="password" id="password_signup" name="password" 
-				   			pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password.">
+				   			pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Enter a valid password."
+							autocomplete="new-password">
 							<input type="checkbox" onclick="togglePassword()">Show Password<br>
 						</td>
 					</tr>

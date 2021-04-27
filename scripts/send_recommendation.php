@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Create a new recommendation in the database */
 	include("db_connect.php");
 	$message = mysqli_real_escape_string($con, $_POST["message"]);
 	$title = mysqli_real_escape_string($con, $_POST["filmTitle"]);

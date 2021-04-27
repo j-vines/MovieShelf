@@ -1,5 +1,10 @@
 <?php
-	//session_start();
+	/*  MovieShelf
+		Jack Vines
+		2020 - 2021
+	*/
+
+	/* Establish connection with the database, included before any operations that access info in database */
 
 	$db_name = "drawertl_jvines";
 

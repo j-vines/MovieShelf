@@ -1,7 +1,14 @@
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Functions used in displaying your or another user's collection */
 
 var filmInfoList = [];
 var currShelfId = 0;
 
+/* Initialize collection by setting every poster displayed as a click event associated with a certain entry in the filmInfoList array */
 function collectionInit() {
 	var posters= document.getElementsByClassName("collectionPosterContainer");
 
@@ -19,10 +26,12 @@ function collectionInit() {
 	}
 }
 
+/* Store the value of the current shelf - used to decide whether a film removed from a shelf should be removed from the client display */
 function setCurrShelf(shelfId) {
 	currShelfId = shelfId;
 }
 
+/* Initialize collection compare page by setting every poster displayed as a click event associated with a certain entry in the filmInfoList array */
 function collectionCompareInit() {
 	
 	var posters= document.getElementsByClassName("collectionPosterContainer");
@@ -41,46 +50,53 @@ function collectionCompareInit() {
 	}
 }
 
-
+/* Store JSON object containing information about film in array of info objects */
 function storeFilmInfo(moreInfo) {
-	//store JSON object containing information about film in array of info objects
 	filmInfoList.push(moreInfo);
 }
 
 /* Shelf functions */
+
+// Hide the shelf options modal box
 function closeShelfOptions() {
 	document.getElementById("shelfOptions").style.display="none";
 	document.getElementById("deleteShelf").style.display="none";
 	document.getElementById("addShelf").style.display="none";
 }
 
+// Display the shelf options modal box
 function showShelfOptions() {
 	showButtons();
 	document.getElementById("shelfOptions").style.display="block";
 }
 
+// Change contents of shelf options modal box to form for creating a shelf
 function showAddShelf() {
 	document.getElementById("addShelf").style.display="block";
 	document.getElementById("deleteShelf").style.display="none";
 	hideButtons();
 }
 
+// Change contents of shelf options modal box to form for deleting a shelf
 function showDeleteShelf() {
 	document.getElementById("deleteShelf").style.display="block";
 	document.getElementById("addShelf").style.display="none";
 	hideButtons();
 }
 
+// Hide buttons for adding and deleting a shelf
 function hideButtons() {
 	document.getElementById("addShelfButton").style.display="none";
 	document.getElementById("deleteShelfButton").style.display="none";
 }
 
+// Show buttons for adding and deleting a shelf
 function showButtons() {
 	document.getElementById("addShelfButton").style.display="block";
 	document.getElementById("deleteShelfButton").style.display="block";
 }
 
+// Cancel operation (delete or create shelf) by hiding forms
 function cancelOp() {
 	showButtons();
 	document.getElementById("deleteShelf").style.display="none";
@@ -90,7 +106,7 @@ function cancelOp() {
 
 /* More info on film functions */
 
-/* showFilmInfo takes JSON object containing film information and displays it in modal box
+/* Take JSON object containing film information and display it in modal box
 	filmInfo includes fields:
 	id - id in database of film
 	title - title of film
@@ -219,6 +235,11 @@ function showFilmInfo(filmInfo) {
 	}
 }
 
+/* Take JSON object containing film information for comparison and display it in modal box
+	filmInfo includes fields:
+	title - title of film
+	releaseYear - year of release of film
+	posterPath - image src for film poster*/
 function showCompareFilmInfo(filmInfo) {
 	document.getElementById("filmInfo").style.display="block";
 	document.getElementById("collectionCompareTitle").innerHTML = filmInfo.title;
@@ -246,6 +267,9 @@ function showCompareFilmInfo(filmInfo) {
 	
 }
 
+/* Asynchronously add recommendation to database 
+	filmInfo - object containing information about a film to be displayed in recommendation body
+*/
 function sendRecommendation(filmInfo) {
 	
 	var message = document.getElementById("message").value;
@@ -266,7 +290,10 @@ function sendRecommendation(filmInfo) {
 				}
 		});
 }
-	
+
+/* Add a review to the database asynchronously
+	id - id of the film the review is associated with 
+*/
 function postReview(id) {
 	var reviewText = document.getElementById("reviewTextArea").value;
 	
@@ -290,6 +317,7 @@ function postReview(id) {
 		});
 }
 
+/* Display form for sending a review in the compare collection film info modal box */
 function showReviewForm(review) {
 	document.getElementById("moreInfoReviewForm").style.display = "block";
 	document.getElementById("moreInfoReviewButton").style.display = "none";
@@ -297,6 +325,7 @@ function showReviewForm(review) {
 	document.getElementById("reviewTextArea").value = review;
 }
 
+/* Hide form for sending a review in the compare collection film info modal box */
 function closeReviewForm(review) {
 	if(review != null) {
 		document.getElementById("moreInfoReviewText").style.display = "block";
@@ -307,6 +336,9 @@ function closeReviewForm(review) {
 	
 }
 
+/* Asynchronously remove film from the film table 
+	id - id of the film to be removed
+*/
 function removeFilm(id) {
 	$.ajax({
 		url: "scripts/remove_film.php",
@@ -320,6 +352,10 @@ function removeFilm(id) {
 		});
 }
 
+/* Modify rating of film in the film table
+	id - id of the film whose rating is to be modified
+	rating - number representing new rating
+*/
 function changeRating(id, rating) {
 	$.ajax({
 		url: "scripts/change_rating.php",
@@ -337,6 +373,10 @@ function changeRating(id, rating) {
 		});
 }
 
+/* Add a film to a shelf
+	shelfId - id of shelf to be added to
+	filmId - id of film to be added to shelf
+*/
 function shelfAdd(shelfId, filmId) {
 	$.ajax({
 		url: "scripts/add_to_shelf.php",
@@ -349,6 +389,10 @@ function shelfAdd(shelfId, filmId) {
 		});
 }
 
+/* Remove a film from a shelf
+	shelfId - id of shelf to be removed from
+	filmId - id of film to be removed from shelf
+*/
 function shelfRemove(shelfId, filmId) {
 	$.ajax({
 		url: "scripts/delete_from_shelf.php",
@@ -366,15 +410,18 @@ function shelfRemove(shelfId, filmId) {
 		});
 }
 
+/* Hide film info modal box */
 function closeFilmInfo() {
 	document.getElementById("filmInfo").style.display="none";
 }
 
+/* Display form for sending recommendations in film info modal box */
 function showRecommendForm() {
 	document.getElementById("recommendForm").style.display = "block";
 	document.getElementById("recommendButton").style.display = "none";
 }
 
+/* Hide form for sending recommendations in film info modal box */
 function closeRecommendForm() {
 	document.getElementById("recommendForm").style.display = "none";
 	document.getElementById("recommendButton").style.display = "block";

@@ -1,3 +1,8 @@
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
 /* Contains functions for setting, getting, and checking cookies */
 
 //Return the value of cookie "name"

@@ -1,4 +1,12 @@
 <?php 
+
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Film search page contains search bar for searching TMDb API for films */
+
 	include "common_header.php";
 ?>
 <!doctype html>

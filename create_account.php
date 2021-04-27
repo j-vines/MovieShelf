@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Add a user to the database */
 	include "scripts/db_connect.php";
 
 	setcookie("signup_error", "", time() - 86400, "/"); //unset signup error cookie for each sign up attempt

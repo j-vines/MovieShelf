@@ -1,8 +1,9 @@
-/**
-	loginMessage.js
-
-
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
 */
+
+/* Functions used in displaying welcome login message */
 var message;
 var form;
 

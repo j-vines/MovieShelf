@@ -1,4 +1,9 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
 //Use user id to look for user display name. If display name not found, default to user name
 	include "scripts/db_connect.php";
 			

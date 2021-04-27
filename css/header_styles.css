@@ -1,5 +1,9 @@
-@charset "UTF-8";
-/* CSS Document */
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Stylesheet included in common header, used accross site */
 
 a {
 	text-decoration: none;
@@ -279,6 +283,7 @@ button:focus {
 }
 
 #moreInfoReviewButton {
+	display: block;
 	margin: auto;
 }
 
@@ -297,6 +302,10 @@ button:focus {
 	width:80%;
 	font-size:30px;
 	font-weight: bold;
+}
+
+#recommendButton {
+	display: block;
 }
 
 #shelfOptionsContent {
@@ -464,4 +473,17 @@ button:focus {
 	-webkit-text-fill-color: greenyellow;
   	-webkit-text-stroke-width: 1px;
   	-webkit-text-stroke-color: black;
+}
+
+.reviewText {
+	padding: 15px;
+	background-color: #dbe4f0;
+}
+
+.post {
+	padding: 15px;
+	background-color: slategrey;
+	width: 80%;
+	margin: auto;
+	margin-top: 15px;
 }

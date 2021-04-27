@@ -1,4 +1,10 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Add a film to the database */
 	include "scripts/db_connect.php";
 	
 	if ($_POST["rating"] == null) {
@@ -8,8 +14,8 @@
 	}
 	$_POST["posterPath"] = mysqli_real_escape_string($con, $_POST["posterPath"]);
 	$_POST["title"] = mysqli_real_escape_string($con, $_POST["title"]);
-	$film_insert = "INSERT INTO film (film_user, tmdb_id, acquired, poster_path, film_format, title, release_year, rating)
-					VALUES (".$_POST["userId"].", ".$_POST["filmId"].", now(), '".$_POST["posterPath"]."', ".$_POST["format"].", '".$_POST["title"]."','".$_POST["releaseDate"]."', ".$rating.");";
+	$film_insert = "INSERT INTO film (film_user, tmdb_id, acquired, poster_path, film_format, title, release_year, rating, time_shared)
+					VALUES (".$_POST["userId"].", ".$_POST["filmId"].", now(), '".$_POST["posterPath"]."', ".$_POST["format"].", '".$_POST["title"]."','".$_POST["releaseDate"]."', ".$rating.", now());";
 	if(!($film_insert_result = mysqli_query($con, $film_insert))) {
 		echo("film could not be inserted...");
 		echo mysqli_error($con);

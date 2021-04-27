@@ -1,4 +1,14 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Collection compare page contains information about two user's collections as well as calculation of similarity
+	of two collections 
+	*/
+
+
 	include("common_header.php");
 	include("scripts/db_connect.php");
 	//create film info modal box

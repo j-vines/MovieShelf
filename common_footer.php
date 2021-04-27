@@ -1,4 +1,10 @@
 <!doctype html>
+<!--  MovieShelf
+	Jack Vines
+	2020 - 2021
+-->
+
+<!-- Footer included on every page across site -->
 <html>
 <head>
 <meta charset="utf-8">

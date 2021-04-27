@@ -1,4 +1,13 @@
 <?php
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Set recommendation in database to open
+	$_POST["idrecommendation"] - id of recommendation to be set to open
+*/
+
 	include("db_connect.php");
 
 	$update = "UPDATE recommendation SET opened = 1 WHERE idrecommendation = ".$_POST["idrecommendation"].";";

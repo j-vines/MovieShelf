@@ -1,4 +1,11 @@
 <?php 
+/*  MovieShelf
+	Jack Vines
+	2020 - 2021
+*/
+
+/* Page for searching for MovieShelf members */
+
 	include "common_header.php";
 ?>
 <!doctype html>
