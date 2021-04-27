@@ -124,8 +124,8 @@
 			}
 			
 		} else {
-			if($visiting) echo("<div class='collectionHeading'><h2>".$collectionUsername." has not started a collection</h2><br>");
-			else echo("<div class='collectionHeading'><h2>You have not started a collection</h2><br>");
+			if($visiting) echo("<div class='collectionHeading'><h2>".$collectionUsername." has not started a collection</h2></div><br>");
+			else echo("<div class='collectionHeading'><h2>You have not started a collection</h2></div><br>");
 		}
 		
 		
@@ -238,7 +238,7 @@
 			echo("</div></div></div></td>");
 			$poster_count += 1;
 		}
-		echo("</tr></table><br><br><br>");
+		echo("</tr></table></div><br><br><br>");
 	}
 
 	/* Returns id and names of shelves that a given film is NOT present in */

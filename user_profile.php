@@ -70,7 +70,7 @@
 			<?php
 			//look for bio -- if not found, fill with default text
 			if($bio != null) { //user has not defined a bio
-				echo("<p>".$bio."<p>");
+				echo("<p>".$bio."</p>");
 			}
 			?>
 		</div>
